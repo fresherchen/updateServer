@@ -17,8 +17,8 @@ RUN rm -fr /setup
 RUN chown -R node:node ${APP_DIR} && \
 	echo "notemicroservices" > /.image_name
 
-# cp custom/runonce scripts
+# add custom/runonce scripts
 COPY scripts /scripts
 
-# cp files
+# copy files
 # ONBUILD COPY src ${APP_DIR}
