@@ -1,8 +1,8 @@
-# Image File Servers API Reference 0.1
+# Image Upgrade File Servers API Reference 0.1
 
 ***
 
-Image File Micro Servers API Docs
+Image Upgrade File Micro Servers API Docs
 
 # 使用说明
 
