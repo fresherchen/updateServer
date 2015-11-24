@@ -11,9 +11,12 @@ FILE_DBUSER=${DB_ENV_DBUSER:-}
 FILE_DBPASS=${DB_ENV_DBPASS:-}
 
 #
-# Stack setup
+# Services setup
 #
-runonce_file() {
+runonce_imageupgradefile() {
+
+    # Services main configs
+    printf "Configuring Services basis settings ... "
     # db configs
     if [[ -n "DB_PORT_27017_TCP_ADDR}" ]]; then
         sudo -u node -H sed -i "s/{{FILE_DBHOST}}/${DB_PORT_27017_TCP_ADDR}/" ${APP_DIR}/config/env/${FILE_ENV}.js
@@ -24,5 +27,5 @@ runonce_file() {
     
     printf "${green}OK\n${end}"
 
-    echo "Initialization for image file completed !!!"
+    echo "Initialization for file image completed !!!"
 }
