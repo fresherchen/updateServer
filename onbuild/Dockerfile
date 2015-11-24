@@ -21,4 +21,4 @@ RUN chown -R node:node ${APP_DIR} && \
 COPY scripts /scripts
 
 # copy files
-# ONBUILD COPY src ${APP_DIR}
+ONBUILD COPY src ${APP_DIR}
