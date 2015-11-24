@@ -119,7 +119,7 @@ results
 ```
 ### http://[baseUrl]/download/:filename
 
-通过文件名获取文件
+通过文件名获取（下载）文件
 
 **Parameters**
 
@@ -133,7 +133,7 @@ filename     |  `string`   | upgrade 文件名
 
 **Returns**
 
-  success: status 200, json type datas
+  success: status 200, file type datas
   fail: fail info
   
 **Example**
@@ -152,7 +152,7 @@ results
 
 ### http://[baseUrl]/file/:fileId
 
-通过fileId获取笔记本
+通过fileId获取文件信息
 
 **Parameters**
 
@@ -194,7 +194,7 @@ results
 
 ### http://[baseUrl]/file/:fileId
 
-通过文件id修改文件信息
+通过文件id和文件名修改文件信息
 
 **Parameters**
 
