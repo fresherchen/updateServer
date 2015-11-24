@@ -8,16 +8,17 @@
 FROM       reg.leadstec.com/nodejs:latest
 MAINTAINER Jpchen <jpchen@leadstec.com>
 
-# clone code 
-RUN git clone http://jpchen:jinpei0930@git.leadstec.com/webapp/imageUpgradeFile-tpl.git
-# install npm packages
-RUN cd mic-tpl/src && \
-    npm install
+# add metadate and install npm 
+COPY assets/setup /setup
+RUN chmod 755 /setup/install && \
+    exec /setup/install
+RUN rm -fr /setup
 
-# clone code 
-ONBUILD git clone http://jpchen:jinpei0930@git.leadstec.com/webapp/imageUpgradeFile.git
-# copy node_module
-ONBUILD COPY mic-tpl/src/node_modules note-microServers/src
+RUN chown -R node:node ${APP_DIR} && \
+	echo "notemicroservices" > /.image_name
 
-# rm files
-# ONBUILD RUN rm mic-tpl
+# cp custom/runonce scripts
+COPY scripts /scripts
+
+# cp files
+# ONBUILD COPY src ${APP_DIR}
