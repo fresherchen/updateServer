@@ -3,8 +3,8 @@ tpl:
 dev:
   build: .
   ports:
-    - "41436:3000"
-    - "41435:22"
+    - "41439:3000"
+    - "41438:22"
   volumes:
     - /var/lib/docker/vfs/dir/logcenter/file-dev.microservices.com:/data/log
     - /var/lib/docker/vfs/dir/datacenter/file-dev.microservices.com:/data/persist
@@ -13,16 +13,17 @@ dev:
     - EMAIL=jpchen@leadstec.com
     - ENGINE=localhost
     - ENABLE_SSHD=true
-    - NODE_ENV=development
+    - FILE_ENV=development
     - PORT=3000
     - FILE_DBNAME=file
   links:
     - devdb:db
   hostname: file-dev.microservices.com
+  restart: always
 devdb:
   image: reg.leadstec.com/mongo:latest
   ports:
-    - "41434:27017"
+    - "41437:27017"
   volumes:
     - /var/lib/docker/vfs/dir/logcenter/file-dev.microservices.com:/data/log
     - /var/lib/docker/vfs/dir/dbcenter/file-dev.microservices.com:/data/db
@@ -32,3 +33,4 @@ devdb:
     - ENGINE=localhost
     - MONGO_TYPE=normal
   hostname: file-dev-db.microservices.com
+  restart: always
