@@ -217,7 +217,7 @@ deltaFile  | `string`  |  文件名
 params:
 
   :fileId 替换为 563c641753c5cb9e40be907b
-
+###  记得将body的格式转换为json
 {
   "deltaFile":"apline-0.1.2_12-0.1.22_22.sh"
 }

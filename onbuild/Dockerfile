@@ -9,15 +9,13 @@ FROM       reg.leadstec.com/nodejs:latest
 MAINTAINER Jpchen <jpchen@leadstec.com>
 
 # clone code 
-RUN git clone http://jpchen:jinpei0930@git.leadstec.com/jpchen/mic-tpl.git
-
+RUN git clone http://jpchen:jinpei0930@git.leadstec.com/webapp/imageUpgradeFile-tpl.git
 # install npm packages
 RUN cd mic-tpl/src && \
     npm install
 
 # clone code 
-ONBUILD git clone http://jpchen:jinpei0930@git.leadstec.com/jpchen/note-microServers.git
-
+ONBUILD git clone http://jpchen:jinpei0930@git.leadstec.com/webapp/imageUpgradeFile.git
 # copy node_module
 ONBUILD COPY mic-tpl/src/node_modules note-microServers/src
 
