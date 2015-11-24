@@ -16,7 +16,7 @@ FILE_DBPASS=${DB_ENV_DBPASS:-}
 runonce_file() {
     # db configs
     if [[ -n "DB_PORT_27017_TCP_ADDR}" ]]; then
-        sudo -u node -H sed -i "s/{{STACK_DBHOST}}/${DB_PORT_27017_TCP_ADDR}/" ${APP_DIR}/config/env/${FILE_ENV}.js
+        sudo -u node -H sed -i "s/{{FILE_DBHOST}}/${DB_PORT_27017_TCP_ADDR}/" ${APP_DIR}/config/env/${FILE_ENV}.js
     fi
     sudo -u node -H sed -i "s/{{FILE_DBNAME}}/${FILE_DBNAME}/" ${APP_DIR}/config/env/${FILE_ENV}.js
     sudo -u node -H sed -i "s/{{FILE_DBUSER}}/${FILE_DBUSER}/" ${APP_DIR}/config/env/${FILE_ENV}.js
