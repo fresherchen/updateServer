@@ -1,18 +1,18 @@
-# Image Upgrade File Servers API Reference 0.1
+# Update Service API Reference 0.1.1
 
 ***
 
-File micro services运行环境，适用于研发及部署。
+Update Service 运行环境，适用于研发及部署。
 
 本镜像提供：
 
-* images upgrade file micro server 0.1
+* update service 0.1.0
 * Node.js 0.12.2
 * Npm 2.7.4
 * Node Packages:
     - grunt
     
-继承关系：file micro services -->nodejs
+继承关系：update service -->nodejs
 
 # 使用说明
 
@@ -22,7 +22,7 @@ File micro services运行环境，适用于研发及部署。
 
 名称 |位置              |说明
 --------|--------------------------|-----------------
-初始化 | /script/runonce_file.sh   | 只有首次启动执行
+初始化 | /script/runonce_updateservice.sh   | 只有首次启动执行
 
 ### PORTS
 
@@ -51,17 +51,17 @@ container路径  | Host存放位置  | 说明
 
 ```
 file:
-  image: reg.leadstec.com/file:latest
+  image: reg.leadstec.com/updateservice:latest
   ports:
   	- "41201:3000"
   volumes:
-  	- /var/lib/docker/vfs/dir/logcenter/file.localhost:/data/log
-  	- /var/lib/docker/vfs/dir/datacenter/file.localhost:/data/persist
-  	- /var/lib/docker/vfs/dir/filecenter/file.localhost:/data/file
+  	- /var/lib/docker/vfs/dir/logcenter/updateservice.localhost:/data/log
+  	- /var/lib/docker/vfs/dir/datacenter/updateservice.localhost:/data/persist
+  	- /var/lib/docker/vfs/dir/filecenter/updateservice.localhost:/data/file
   environment:
   	- EMAIL=user@example.com
   	- ENGINE=localhost
-  hostname: nodejs.localhost
+  hostname: updateservice.localhost
 ```
 
 ### Link Container
@@ -75,14 +75,14 @@ db:
    	 - "41203:27017"
    	 - "41204:28017"
    volumes:
-     - /var/lib/docker/vfs/dir/logcenter/file-db.example.com:/data/log
-     - /var/lib/docker/vfs/dir/datacenter/filep-db.example.com:/data/persist
+     - /var/lib/docker/vfs/dir/logcenter/updateservice-db.example.com:/data/log
+     - /var/lib/docker/vfs/dir/datacenter/updateservice-db.example.com:/data/persist
    links:
      - db:db
    environment:
      - EMAIL=user@example.com
      - ENGINE=localhost
-   hostname: app.example.com
+   hostname: updateservice.example.com
 ```
 
 

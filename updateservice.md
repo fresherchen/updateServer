@@ -1,4 +1,4 @@
-# Update Service API Reference 0.1
+# Update Service API Reference 0.1.1
 
 ***
 
@@ -8,75 +8,15 @@ Update Service  API Docs
 
 本servers是基于nodejs+mongodb开发的，以通过调用API的方式对外提供Imag升级数据服务。
 
-文档的命名格式:image-version_build-version_build.sh
+文档的命名格式:`image-version_build-version_build.sh`
 
 目前版本暂不需要通过token验证即可调用，验证部分待后续补充。
 
 # 主要方法
 
-## File
+## uploadFile / download
 
 ***
-
-### http://[baseUrl]/file
-
-查看全部file list
-
-**Parameters**
-
-Param   |  Type     |details
----------|-------------|---------------------
-image   |  `string`   | image的名称 
-buildStart | `number` | 增量升级文件起始build号
-buildEnd |  `number`  | 增量升级文件目标build号
-deltaFile(optional) | `string` | 增量升级文件的名称
-
-**Request Method**
-
-  `get`
-
-**Returns**
-
-  success: status 200, json type datas
-  fail: fail info
-  
-**Example**
-```
-params:
-
-  "name": "alpine",
-  "buildStart": "10",
-  "buildEnd": "20"
-  
-  ......
-  
-results
-[
-  {
-   "_id": "5652c112a131b5550299d971",
-   "versionStart": "0.1.2",
-   "versionEnd": "0.1.8",
-   "buildStart": 12,
-   "buildEnd": 16,
-   "deltaFile": "apline-0.1.2_12-0.1.8_16.sh",
-   "__v": 0,
-   "updatedOn": "2015-11-23T07:27:50.964Z",
-   "image": "apline"
-  },
-  {
-   "_id": "5652c2b8483ec9a902d83cfe",
-   "versionStart": "0.1.2",
-   "versionEnd": "0.1.8",
-   "buildStart": 17,
-   "buildEnd": 19,
-   "deltaFile": "apline-0.1.2_17-0.1.8_19.sh",
-   "__v": 0,
-   "updatedOn": "2015-11-23T07:37:04.591Z",
-   "image": "apline"
-  }
-]
-
-```
 
 ### http://[baseUrl]/uploadFile/
 
@@ -150,7 +90,71 @@ params:
   
 results
 
-	apline-0.1.2_12-0.1.8_16.sh
+  apline-0.1.2_12-0.1.8_16.sh
+
+```
+
+## File
+
+***
+
+### http://[baseUrl]/file
+
+查看全部file list
+
+**Parameters**
+
+Param   |  Type     |details
+---------|-------------|---------------------
+image   |  `string`   | image的名称 
+buildStart | `number` | 增量升级文件起始build号
+buildEnd |  `number`  | 增量升级文件目标build号
+deltaFile(optional) | `string` | 增量升级文件的名称
+
+**Request Method**
+
+  `get`
+
+**Returns**
+
+  success: status 200, json type datas
+  fail: fail info
+  
+**Example**
+```
+params:
+
+  "name": "alpine",
+  "buildStart": "10",
+  "buildEnd": "20"
+  
+  ......
+  
+results
+[
+  {
+   "_id": "5652c112a131b5550299d971",
+   "versionStart": "0.1.2",
+   "versionEnd": "0.1.8",
+   "buildStart": 12,
+   "buildEnd": 16,
+   "deltaFile": "apline-0.1.2_12-0.1.8_16.sh",
+   "__v": 0,
+   "updatedOn": "2015-11-23T07:27:50.964Z",
+   "image": "apline"
+  },
+  {
+   "_id": "5652c2b8483ec9a902d83cfe",
+   "versionStart": "0.1.2",
+   "versionEnd": "0.1.8",
+   "buildStart": 17,
+   "buildEnd": 19,
+   "deltaFile": "apline-0.1.2_17-0.1.8_19.sh",
+   "__v": 0,
+   "updatedOn": "2015-11-23T07:37:04.591Z",
+   "image": "apline"
+  }
+]
 
 ```
 

@@ -1,9 +1,9 @@
 {
-	"name": "appstack",
-	"description": "AppStack",
-	"version": "0.1.0",
+	"name": "updateservice",
+	"description": "Updateservice",
+	"version": "0.1.1",
 	"private": true,
-	"author": "Frank,H.L.Lai <frank@leadstec.com>",
+	"author": "Jpchen <jpchen@leadstec.com>",
 	"engines": {
 		"node": ">=0.10.33"
 	},
