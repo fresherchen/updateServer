@@ -14,93 +14,13 @@ Update Service  API Docs
 
 # 主要方法
 
-## uploadFile / download
-
-***
-
-### http://[baseUrl]/uploadFile/
-
-上传新的update文件
-
-## 文档的命名格式:image-version_build-version_build.sh
-
-**Parameters**
-
-Param   |  Type     |details
----------|-------------|---------------------
-file     |  `file`   | update文件
-
-**Request Method**
-
-  `post`
-
-**Returns**
-
-  success: status 200, json type datas
-  fail: fail info
-  
-**Example**
-```
-params:
-
-  "file": "apline-0.1.2_12-0.1.8_16.sh"
-  
-  ......
-  
-results
-{
-  "__v": 0,
-  "versionStart": "0.1.2",
-  "versionEnd": "0.1.8",
-  "buildStart": 12,
-  "buildEnd": 16,
-  "deltaFile": "apline-0.1.2_12-0.1.8_16.sh",
-  "_id": "5652c112a131b5550299d971",
-  "updatedOn": "2015-11-23T07:27:50.964Z",
-  "image": "apline"
-}
-
-```
-### http://[baseUrl]/download/:filename
-
-通过文件名获取（下载）文件
-
-**Parameters**
-
-Param   |  Type     |details
----------|-------------|---------------------
-filename     |  `string`   | update文件名
-
-**Request Method**
-
-  `get`
-
-**Returns**
-
-  success: status 200, file type datas
-  fail: fail info
-  
-**Example**
-```
-params:
-
-  ':filename': apline-0.1.2_12-0.1.8_16.sh
-  
-  ......
-  
-results
-
-  apline-0.1.2_12-0.1.8_16.sh
-
-```
-
 ## File
 
 ***
 
-### http://[baseUrl]/file
+### http://[baseUrl]/files
 
-查看全部file list
+查看files list
 
 **Parameters**
 
@@ -158,7 +78,83 @@ results
 
 ```
 
-### http://[baseUrl]/file/:fileId
+### http://[baseUrl]/files
+
+上传新的update文件
+
+## 文档的命名格式:image-version_build-version_build.sh
+
+**Parameters**
+
+Param   |  Type     |details
+---------|-------------|---------------------
+file     |  `file`   | update文件
+
+**Request Method**
+
+  `post`
+
+**Returns**
+
+  success: status 200, json type datas
+  fail: fail info
+  
+**Example**
+```
+params:
+
+  "file": "apline-0.1.2_12-0.1.8_16.sh"
+  
+  ......
+  
+results
+{
+  "__v": 0,
+  "versionStart": "0.1.2",
+  "versionEnd": "0.1.8",
+  "buildStart": 12,
+  "buildEnd": 16,
+  "deltaFile": "apline-0.1.2_12-0.1.8_16.sh",
+  "_id": "5652c112a131b5550299d971",
+  "updatedOn": "2015-11-23T07:27:50.964Z",
+  "image": "apline"
+}
+
+```
+### http://[baseUrl]/files/:filename/download
+
+通过文件名获取（下载）文件
+
+**Parameters**
+
+Param   |  Type     |details
+---------|-------------|---------------------
+filename     |  `string`   | update文件名
+
+**Request Method**
+
+  `get`
+
+**Returns**
+
+  success: status 200, file type datas
+  fail: fail info
+  
+**Example**
+```
+params:
+
+  ':filename': apline-0.1.2_12-0.1.8_16.sh
+  
+  ......
+  
+results
+
+  apline-0.1.2_12-0.1.8_16.sh
+
+```
+
+### http://[baseUrl]/files/:fileId
 
 通过fileId获取文件信息
 
@@ -200,7 +196,7 @@ results
 
 ```
 
-### http://[baseUrl]/file/:fileId
+### http://[baseUrl]/files/:fileId
 
 通过文件id和文件名修改文件信息
 
@@ -211,9 +207,11 @@ Param   |  Type     |details
 :fileId |  `string`  |  文件id
 deltaFile  | `string`  |  文件名
 
+###  记得将deltaFile参数的格式转换为json
+
 **Request Method**
 
-  `put`
+  `post`
 
 **Returns**
 
@@ -225,7 +223,7 @@ deltaFile  | `string`  |  文件名
 params:
 
   :fileId 替换为 563c641753c5cb9e40be907b
-###  记得将body的格式转换为json
+
 {
   "deltaFile":"apline-0.1.2_12-0.1.22_22.sh"
 }
@@ -237,7 +235,7 @@ results
 
 ```
 
-### http://[baseUrl]/file/:fileId
+### http://[baseUrl]/files/:fileId
 
 通过文件id删除文件
 

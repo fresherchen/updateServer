@@ -4,16 +4,23 @@
  * Module dependencies 
  */
 var checkToken = require('../../app/controllers/check-token'),
+	fileUpDown = require('../../app/controllers/file-updown'),
+	multipart = require('connect-multiparty'),
+	multipartMiddleware = multipart(),
 	file = require('../../app/controllers/file');	
 
 module.exports = function(app){
-	app.route('/file')
-	.get(checkToken.checkTokeninUrl,file.list);
+	app.route('/files')
+	.get(checkToken.checkTokeninUrl,file.list)
+	.post(checkToken.checkTokeninBody,multipartMiddleware,fileUpDown.uploadfile);
 	
-	app.route('/file/:fileId')
+	app.route('/files/:fileId')
 	.get(checkToken.checkTokeninUrl,file.read)
-	.put(checkToken.checkTokeninBody,file.update)
+	.post(checkToken.checkTokeninBody,file.update)
 	.delete(checkToken.checkTokeninBody,file.delete);
+	
+	app.route('/files/:filename/download')
+	.get(checkToken.checkTokeninUrl,fileUpDown.downloadfile);	
 	
 	app.param('fileId',file.fileById);
 };
