@@ -1,8 +1,8 @@
-# Image Upgrade File Servers API Reference 0.1
+# Update Service API Reference 0.1
 
 ***
 
-Image Upgrade File Micro Servers API Docs
+Update Service  API Docs
 
 # 使用说明
 
@@ -80,7 +80,7 @@ results
 
 ### http://[baseUrl]/uploadFile/
 
-上传新的upgrade文件
+上传新的update文件
 
 ## 文档的命名格式:image-version_build-version_build.sh
 
@@ -88,7 +88,7 @@ results
 
 Param   |  Type     |details
 ---------|-------------|---------------------
-file     |  `file`   | upgrade 文件
+file     |  `file`   | update文件
 
 **Request Method**
 
@@ -129,7 +129,7 @@ results
 
 Param   |  Type     |details
 ---------|-------------|---------------------
-filename     |  `string`   | upgrade 文件名
+filename     |  `string`   | update文件名
 
 **Request Method**
 
