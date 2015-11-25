@@ -21,7 +21,7 @@ exports.create = function(req,res){
 				if(err){
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
-					})
+					});
 				}else{
 					res.json(readyFile);
 				}
@@ -57,7 +57,7 @@ exports.list = function(req,res){
 		if(err){
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
-			})
+			});
 		}else{
 			res.json(files);
 		}
@@ -94,7 +94,7 @@ exports.delete = function(req,res){
 		if(err){
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
-			})
+			});
 		}else{
 			fileUpDown.removefile(file.deltaFile,function(back){
 				res.json(back);
