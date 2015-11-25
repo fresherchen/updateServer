@@ -96,16 +96,16 @@ exports.removefile = function(filename,callback){
 exports.parseFilename = function(orgfilename){
 	var filename = orgfilename.replace('.sh','');
 	var allVar = filename.split('-');
-		if(allVar.length != 3)
+		if(allVar.length !== 3)
 		return;
 	var image = allVar[0];
 	var startVal = allVar[1].split('_');
-		if(startVal.length !=2)
+		if(startVal.length !==2)
 		return;
 	var versionStart = startVal[0],
 		buildStart = parseInt(startVal[1]);
 	var endVal = allVar[2].split('_');
-		if(endVal.length !=2)
+		if(endVal.length !==2)
 		return;
 	var versionEnd = endVal[0],
 		buildEnd = parseInt(endVal[1]);

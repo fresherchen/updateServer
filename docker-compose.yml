@@ -15,7 +15,7 @@ dev:
     - ENABLE_SSHD=true
     - FILE_ENV=development
     - PORT=3000
-    - FILE_DBNAME=file
+    - FILE_DBNAME=imageupgradefile
   links:
     - devdb:db
   hostname: file-dev.microservices.com
@@ -32,5 +32,6 @@ devdb:
     - EMAIL=jpchen@leadstec.com
     - ENGINE=localhost
     - MONGO_TYPE=normal
+    - MONGOD_ENABLE_SMALLFILES=true
   hostname: file-dev-db.microservices.com
   restart: always
