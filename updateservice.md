@@ -6,7 +6,7 @@ Update Service  API Docs
 
 # 使用说明
 
-本servers是基于nodejs+mongodb开发的，以通过调用API的方式对外提供Imag升级数据服务。
+本servers是基于nodejs+mongodb开发的，以通过调用API的方式对外提供Image升级数据服务。
 
 文档的命名格式:`image-version_build-version_build.sh`
 
