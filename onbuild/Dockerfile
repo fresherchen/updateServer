@@ -15,10 +15,10 @@ RUN chmod 755 /setup/install && \
 RUN rm -fr /setup
 
 RUN chown -R node:node ${APP_DIR} && \
-	echo "notemicroservices" > /.image_name
+	echo "updateservice" > /.image_name
 
 # add custom/runonce scripts
 COPY scripts /scripts
 
-# copy files
+# copy code
 ONBUILD COPY src ${APP_DIR}

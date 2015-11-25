@@ -1,4 +1,4 @@
-# Update Service API Reference 0.1
+# Update Service API Reference 0.1.0
 
 ***
 
@@ -8,7 +8,7 @@ Update Service  API Docs
 
 本servers是基于nodejs+mongodb开发的，以通过调用API的方式对外提供Imag升级数据服务。
 
-文档的命名格式:image-version_build-version_build.sh
+文档的命名格式:`image-version_build-version_build.sh`
 
 目前版本暂不需要通过token验证即可调用，验证部分待后续补充。
 

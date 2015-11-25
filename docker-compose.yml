@@ -6,32 +6,32 @@ dev:
     - "41439:3000"
     - "41438:22"
   volumes:
-    - /var/lib/docker/vfs/dir/logcenter/file-dev.microservices.com:/data/log
-    - /var/lib/docker/vfs/dir/datacenter/file-dev.microservices.com:/data/persist
-    - /var/lib/docker/vfs/dir/filecenter/file-dev.microservices.com:/data/file
+    - /var/lib/docker/vfs/dir/logcenter/update-dev.microservice.com:/data/log
+    - /var/lib/docker/vfs/dir/datacenter/update-dev.microservice.com:/data/persist
+    - /var/lib/docker/vfs/dir/filecenter/update-dev.microservice.com:/data/file
   environment:
     - EMAIL=jpchen@leadstec.com
     - ENGINE=localhost
     - ENABLE_SSHD=true
-    - FILE_ENV=development
+    - UPDATE_ENV=development
     - PORT=3000
-    - FILE_DBNAME=imageupgradefile
+    - UPDATE_DBNAME=updateservice
   links:
     - devdb:db
-  hostname: file-dev.microservices.com
+  hostname: update-dev.microservice.com
   restart: always
 devdb:
   image: reg.leadstec.com/mongo:latest
   ports:
     - "41437:27017"
   volumes:
-    - /var/lib/docker/vfs/dir/logcenter/file-dev-db.microservices.com:/data/log
-    - /var/lib/docker/vfs/dir/dbcenter/file-dev-db.microservices.com:/data/db
-    - /var/lib/docker/vfs/dir/datacenter/file-dev-db.microservices.com:/data/persist
+    - /var/lib/docker/vfs/dir/logcenter/update-dev-db.microservice.com:/data/log
+    - /var/lib/docker/vfs/dir/dbcenter/update-dev-db.microservice.com:/data/db
+    - /var/lib/docker/vfs/dir/datacenter/update-dev-db.microservice.com:/data/persist
   environment:
     - EMAIL=jpchen@leadstec.com
     - ENGINE=localhost
     - MONGO_TYPE=normal
     - MONGOD_ENABLE_SMALLFILES=true
-  hostname: file-dev-db.microservices.com
+  hostname: update-dev-db.microservice.com
   restart: always
