@@ -205,9 +205,7 @@ results
 Param   |  Type     |details
 ---------|-------------|---------------------
 :fileId |  `string`  |  文件id
-deltaFile  | `string`  |  文件名
-
-###  记得将deltaFile参数的格式转换为json
+deltaFile  | `string`  |  文件名（格式转换为json）
 
 **Request Method**
 
