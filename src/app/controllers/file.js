@@ -23,45 +23,77 @@ exports.create = function(req,res){
 						message: errorHandler.getErrorMessage(err)
 					});
 				}else{
-					res.json(readyFile);
+					var prefile = JSON.stringify(readyFile),
+						retFile = JSON.parse(prefile);
+					retFile.filePath = retFile.domainName+'/files/'+retFile.deltaFile+'/download';
+					res.json(retFile);
 				}
 			});
 		}else{
-			res.json({result:'this .sh has existed !!!'});
+			res.json({message:'this '+readyFile.deltaFile+' has existed !!!'});
 		}
 	});
 };
 
 // file read
 exports.read = function(req,res){
-	res.json(req.file);
+	var file = JSON.stringify(req.file),
+		retFile = JSON.parse(file);
+		retFile.filePath = retFile.domainName+'/files/'+retFile.deltaFile+'/download';
+	res.json(retFile);
 };
 
 // file list
 exports.list = function(req,res){
+	var parseBuild = function(preBuild){
+		var retBuild = preBuild.split('-');
+		if(retBuild.length !== 2){
+			res.json({message:'Oops, bad buildStart/buildEnd format!!!'});
+			return;
+		}
+		return retBuild[1];
+	};
 	var searchCon = {};
 	if(req.query){
 		if(req.query.image){
 			searchCon.image = req.query.image;
-		}else return;
-
-		if(req.query.buildStart || req.query.buildEnd || (req.query.buildStart<req.query.buildEnd)){
-			searchCon.buildEnd = {$gt:req.query.buildStart,$lte:req.query.buildEnd};
-		}else return;
+		}else{
+			res.json({message : 'Oops, bad image!!!'});
+			return;
+		}
+		var buildStart = parseBuild(req.query.buildStart),
+			buildEnd = parseBuild(req.query.buildEnd);
+		if(buildStart || buildEnd || (buildStart<buildEnd)){
+			searchCon.buildEnd = {$gt:buildStart,$lte:buildEnd};
+		}else{
+			res.json({message:'Oops, bad buildStart/buildEnd format!!!'});
+			return;
+		}
 		if(req.query.deltaFile){
 			searchCon.deltaFile = req.query.deltaFile;
 		}
 	}
-	
 	Files.find(searchCon).sort({ buildEnd: 1 }).exec(function(err,files){
 		if(err){
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		}else{
-			res.json(files);
+			var retval = exports.addPath(files);
+			res.json(retval);
 		}
 	});
+};
+
+exports.addPath = function(files){
+	var retFiles = JSON.stringify(files),
+		pureFiles = JSON.parse(retFiles); 
+		if(pureFiles.length){
+			for(var i in pureFiles){
+				pureFiles[i].filePath = pureFiles[i].domainName+'/files/'+pureFiles[i].deltaFile+'/download';
+			}
+			return pureFiles;
+		}
 };
 
 // file update image/deltaFile
@@ -71,19 +103,26 @@ exports.update = function(req,res){
 		originalFilename = req.file.deltaFile,
 		currentFilename = req.body.deltaFile,
 		retVal = fileUpDown.parseFilename(currentFilename);
-	
-	var readyFile  = _.extend(file, retVal);
-	readyFile.save(function(err){
-		if(err){
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
+	Files.find({deltaFile: currentFilename}).exec(function(err,databack){
+		if(!databack.length){
+			var readyFile  = _.extend(file, retVal);
+			readyFile.save(function(err){
+				if(err){
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				}else{
+					fileUpDown.renamefile(originalFilename, currentFilename,function(path){
+						res.json(path);
+					});
+				}
 			});
 		}else{
-			fileUpDown.renamefile(originalFilename, currentFilename,function(path){
-				res.json(path);
-			});
+			res.json({message: currentFilename+' is existed!!!'});
 		}
 	});
+	
+	
 };
 
 // file delete
@@ -108,7 +147,10 @@ exports.fileById = function(req,res,next,id){
 		if(err){
 			return next(err);
 		}
-		if(!file) return next('Failed to load the file');
+		if(!file){
+			res.json({message: 'Failed to load the file'});
+			return next('Failed to load the file');
+		}
 		req.file = file;
 		next();
 	});
