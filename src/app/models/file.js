@@ -34,6 +34,10 @@ var FileSchema = new Schema({
 		type: String,
 		required: true
 	},
+	domainName: {
+		type: String,
+		required: true
+	},
 	updatedOn: {
 		type: Date,
 		default: Date.now()

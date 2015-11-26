@@ -13,8 +13,7 @@ exports.uploadfile = function(req,res){
 	var file = req.files.file,
 		filename = file.originalFilename,
 		path = file.path,
-		retVaL = exports.parseFilename(filename);
-
+		retVaL = exports.parseFilename(filename,res);
 	var secondPath = '/data/file',
 		thirdPath = Path.join(secondPath,retVaL.image),
 		readable = fs.createReadStream(path),
@@ -67,7 +66,11 @@ exports.downloadfile = function(req,res){
 	var filename = req.params.filename,
 		vetVar = exports.parseFilename(filename),
 		image = vetVar.image;
-	res.download('/data/file/'+image+'/'+filename);
+	res.download('/data/file/'+image+'/'+filename,filename,function(err){
+		if(err){
+			res.send({message: filename+' is not found!!!'});
+		}
+	});
 };
 
 exports.renamefile = function(originalFilename, currentFilename,callback){
@@ -88,33 +91,45 @@ exports.removefile = function(filename,callback){
 	var path = '/data/file/'+retVal.image+'/'+filename;
 	fs.unlink(path, function (err) {
 	  if (err) throw err;
-	  callback({result:'successfully deleted'});
+	  callback({message:'Successfully deleted'});
 	});
 };
 
-// image-version_build-version_build.sh
-exports.parseFilename = function(orgfilename){
-	var filename = orgfilename.replace('.sh','');
-	var allVar = filename.split('-');
-		if(allVar.length !== 3)
+// image_version-build_version-build.sh
+exports.parseFilename = function(orgfileName,res){
+	if(!orgfileName){
+		res.send({message: 'File name is null!!!'});
 		return;
+	}
+	var filename = orgfileName.replace('.sh','');
+	var allVar = filename.split('_');
+		if(allVar.length !== 3){
+			res.send({message:'Oops, the filename format is not correct!!!'});
+			return;
+		}
 	var image = allVar[0];
-	var startVal = allVar[1].split('_');
-		if(startVal.length !==2)
-		return;
+	var startVal = allVar[1].split('-');
+		if(startVal.length !==2){
+			res.send({message:'Oops, the filename format is not correct!!!'});
+			return;
+		}
 	var versionStart = startVal[0],
 		buildStart = parseInt(startVal[1]);
-	var endVal = allVar[2].split('_');
-		if(endVal.length !==2)
-		return;
+	var endVal = allVar[2].split('-');
+		if(endVal.length !==2){
+			res.send({message:'Oops, the filename format is not correct!!!'});
+			return;
+		}
 	var versionEnd = endVal[0],
 		buildEnd = parseInt(endVal[1]);
+	var domainName = '192.168.2.102:41439';
 		return {
 			image: image,
 			versionStart: versionStart,
 			versionEnd: versionEnd,
 			buildStart: buildStart,
 			buildEnd: buildEnd,
-			deltaFile: orgfilename
+			deltaFile: orgfileName,
+			domainName: domainName
 		};
 };
