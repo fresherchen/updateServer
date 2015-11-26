@@ -2,11 +2,11 @@
 
 module.exports = {
 	db: {
-		uri: 'mongodb://{{FILE_DBHOST}}/{{FILE_DBNAME}}',
+		uri: 'mongodb://{{UPDATE_DBHOST}}/{{UPDATE_DBNAME}}',
 		// uri: 'mongodb://n01.lxpt.cn:41204/cap-dev',
 		options: {
-			user: '{{FILE_DBUSER}}',
-			pass: '{{FILE_DBPASS}}'
+			user: '{{UPDATE_DBUSER}}',
+			pass: '{{UPDATE_DBPASS}}'
 			// user: '',
 			// pass: ''
 		}
