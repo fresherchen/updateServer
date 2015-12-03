@@ -91,7 +91,7 @@ exports.removefile = function(filename,callback){
 	var path = '/data/file/'+retVal.image+'/'+filename;
 	fs.unlink(path, function (err) {
 	  if (err) throw err;
-	  callback({message:'Successfully deleted'});
+	  callback({message:'Deleted Successfully!!!'});
 	});
 };
 

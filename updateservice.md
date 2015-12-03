@@ -269,7 +269,7 @@ params:
 
 results
 {
-  "message": "successfully deleted"
+  "message": "Deleted successfully !!!"
 }
 
 ```
