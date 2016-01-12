@@ -26,10 +26,10 @@ Update Service  API Docs
 
 Param   |  Type     |details
 ---------|-------------|---------------------
-image   |  `string`   | image的名称
-buildStart | `number` | 增量升级文件起始version-build
-buildEnd |  `number`  | 增量升级文件目标version-build
-deltaFile(optional) | `string` | 增量升级文件的名称
+image   |  `String`   | image的名称
+buildStart | `Number` | 增量升级文件起始version-build
+buildEnd |  `Number`  | 增量升级文件目标version-build
+deltaFile(optional) | `String` | 增量升级文件的名称
 
 **Request Method**
 
@@ -92,7 +92,7 @@ results
 
 Param   |  Type     |details
 ---------|-------------|---------------------
-file     |  `file`   | update文件
+file     |  `File`   | update文件
 
 **Request Method**
 
@@ -135,7 +135,7 @@ results
 
 Param   |  Type     |details
 ---------|-------------|---------------------
-filename     |  `string`   | update文件名
+filename     |  `String`   | update文件名
 
 **Request Method**
 
@@ -168,7 +168,7 @@ results
 
 Param   |  Type     |details
 ---------|-------------|---------------------
-:fileId |  `string`  |  文件id
+:fileId |  `String`  |  文件id
 
 **Request Method**
 
@@ -212,8 +212,8 @@ results
 
 Param   |  Type     |details
 ---------|-------------|---------------------
-:fileId |  `string`  |  文件id
-deltaFile  | `string`  |  文件名（格式转换为json）
+:fileId |  `String`  |  文件id
+deltaFile  | `String`  |  文件名（格式转换为json）
 
 **Request Method**
 
@@ -249,7 +249,7 @@ results
 
 Param   |Type     |details
 ---------|-------------|---------------------
-:fileId |  `string`  |  文件id
+:fileId |  `String`  |  文件id
 
 **Request Method**
 
@@ -269,7 +269,7 @@ params:
 
 results
 {
-  "message": "successfully deleted"
+  "message": "Deleted successfully !!!"
 }
 
 ```
