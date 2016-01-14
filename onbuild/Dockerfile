@@ -8,17 +8,18 @@
 FROM       reg.leadstec.com/nodejs:latest
 MAINTAINER Jpchen <jpchen@leadstec.com>
 
-# add metadate and install npm 
+# add metadate
 COPY assets/setup /setup
 RUN chmod 755 /setup/install && \
     exec /setup/install
 RUN rm -fr /setup
 
-RUN chown -R node:node ${APP_DIR} && \
-	echo "updateservice" > /.image_name
-
 # add custom/runonce scripts
 COPY scripts /scripts
+
+# install npm packages
+COPY package.json ${APP_DIR}/package.json
+RUN cd ${APP_DIR} && sudo -u node -H npm install
 
 # copy code
 ONBUILD COPY src ${APP_DIR}

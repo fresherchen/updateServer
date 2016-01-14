@@ -18,14 +18,3 @@ captool metadata --addimage -i updateservice -v ${UPDATESERVICE_VERSION} -b ${BU
 printf "${green}OK\n${end}"
 
 echo "${yellow}UPDATESERVICE: Image installation completed.${end}"
-
-
-echo "${yellow}UPDATESERVICE: Npm installation starts ...${end}"
-
-printf "Installing npm dependencies ...${end}"
-# install npm packages
-curl http://repo.lxpt.cn/artifactory/ext-release/nodejs/node_modules_0.1.0.tar.gz | tar xz -C /data/app
-
-printf "${green}Npm installation is OK\n${end}"
-
-echo "${yellow}UPDATESERVICE: Npm installation completed.${end}"
