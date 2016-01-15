@@ -8,6 +8,9 @@
 FROM       reg.leadstec.com/nodejs:latest
 MAINTAINER Jpchen <jpchen@leadstec.com>
 
+# install packages
+RUN apk --update add gcc g++ make
+
 # add metadate
 # COPY assets/setup /setup
 # RUN chmod 755 /setup/install && \
