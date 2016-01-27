@@ -6,8 +6,8 @@ Update Service 运行环境，适用于研发及部署。
 
 本镜像提供：
 
-* update service 0.1.0
-* Node.js 0.12.2
+* update service 0.1.1
+* Node.js 0.12.3
 * Npm 2.7.4
 * Node Packages:
     - grunt
