@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * Module dependencies. 
+ * Module dependencies.
  */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
-  
+
 /**
  * File Schema
  */
@@ -25,13 +25,14 @@ var FileSchema = new Schema({
     required: true
   },
   versionStart: {
-    type: String,
+    type: String
   },
   versionEnd: {
     type: String
   },
   deltaFile: {
     type: String,
+    trim: true,
     required: true
   },
   domainName: {
@@ -43,4 +44,10 @@ var FileSchema = new Schema({
     default: Date.now()
   }
 });
+
+// Define a virtual filePath
+FileSchema.virtual('filePath').get(function(){
+  return this.domainName +'/files/'+ this.deltaFile +'/download';
+});
+
 mongoose.model('Files',FileSchema);

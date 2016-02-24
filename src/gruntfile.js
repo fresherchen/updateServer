@@ -6,8 +6,7 @@ module.exports = function(grunt) {
   // Unified Watch Object
   var watchFiles = {
     serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js', '!app/tests/'],
-    clientJS: ['public/js/*.js', 'public/modules/**/*.js', '!public/modules/**/directives/*.js', '!public/modules/**/lib/*.js'],
-    // mochaTests: ['app/tests/**/*.js']
+    mochaTests: ['app/tests/**/*.js']
   };
 
   // Project Configuration
@@ -21,14 +20,14 @@ module.exports = function(grunt) {
           livereload: true
         }
       },
-      // mochaTests: {
-        // files: watchFiles.mochaTests,
-        // tasks: ['test:server'],
-      // }
+      mochaTests: {
+        files: watchFiles.mochaTests,
+        tasks: ['test:server'],
+      }
     },
     jshint: {
       all: {
-        src: watchFiles.clientJS.concat(watchFiles.serverJS),
+        src: watchFiles.serverJS,
         options: {
           jshintrc: true
         }
@@ -40,7 +39,6 @@ module.exports = function(grunt) {
         options: {
           nodeArgs: ['--debug'],
           ext: 'js,html',
-          // watch: watchFiles.serverViews.concat(watchFiles.serverJS)
           watch: watchFiles.serverJS
         }
       }

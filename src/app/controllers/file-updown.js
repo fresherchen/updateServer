@@ -1,17 +1,21 @@
 'use strict';
 /**
- * Module dependencies 
+ * Module dependencies
  */
 
 var fs = require('fs'),
-  url = require('url'),
-  Files = require('./file');  
-var Path = require('path');
+  Files = require('./file'),
+  Path = require('path');
+var  mkdirp = require('mkdirp');
 
 exports.uploadfile = function(req,res){
-  
-  var file = req.files.file,
-    filename = file.originalFilename,
+
+  var file = req.files.file;
+    if(!file) {
+      res.send({message: 'No file is uploading!!!'});
+      return;
+    }
+  var filename = file.originalFilename,
     path = file.path,
     retVaL = exports.parseFilename(filename,res);
   var secondPath = '/data/file',
@@ -19,44 +23,37 @@ exports.uploadfile = function(req,res){
     readable = fs.createReadStream(path),
     writeable;
 
-    fs.exists(secondPath, function (exists) {
-      if(exists){
-        fs.exists(thirdPath, function (exists) {
-          if(exists){
+    fs.stat(secondPath, function (er, s){
+      if(!er && s.isDirectory()){
+        fs.stat(thirdPath, function (er, s){
+          if(!er && s.isDirectory()){
             // console.dir('44444444444444444444');
-              
             writeable = fs.createWriteStream(Path.join(thirdPath,filename));
             readable.pipe(writeable);
             Files.create(req,res);
           }else{
             fs.mkdir(thirdPath,function(err){
-                  // console.dir("333333333333333333");
-                  if(err) {
-                    return err;
-                  }else{
+              if(err){
+                return err;
+              }else{
+                // console.dir('3333333333333333333');
                 writeable = fs.createWriteStream(Path.join(thirdPath,filename));
                 readable.pipe(writeable);
                 Files.create(req,res);
-                  }
+              }
             });
           }
         });
       }else{
-        fs.mkdir(secondPath,function(err){
-              // console.dir("2222222222222222222");
-              if(err) {
-                return err;
-              }else{
-                fs.mkdir(thirdPath,function(err){
-                  if(err) {
-                    return err;
-                  }else{
-                writeable = fs.createWriteStream(Path.join(thirdPath,filename));
-                readable.pipe(writeable);
-                Files.create(req,res);
-                  }
-            });
-              }
+        mkdirp(thirdPath,function(err){
+          // console.dir('2222222222222222222');
+          if(err) {
+            return err;
+          }else{
+            writeable = fs.createWriteStream(Path.join(thirdPath,filename));
+            readable.pipe(writeable);
+            Files.create(req,res);
+          }
         });
       }
     });
@@ -95,7 +92,7 @@ exports.removefile = function(filename,callback){
   });
 };
 
-// image_version-build_version-build.sh
+// image_version-buildStart_version-buildEnd.sh
 exports.parseFilename = function(orgfileName,res){
   if(!orgfileName){
     res.send({message: 'File name is null!!!'});
@@ -122,6 +119,7 @@ exports.parseFilename = function(orgfileName,res){
     }
   var versionEnd = endVal[0],
     buildEnd = parseInt(endVal[1]);
+    //  get this domain name
   var domainName = '192.168.2.102:41439';
     return {
       image: image,

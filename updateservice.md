@@ -1,4 +1,4 @@
-# Update Service API Reference 0.1.1
+# Update Service API Reference 0.1.2
 
 ***
 
@@ -6,11 +6,13 @@ Update Service  API Docs
 
 # 使用说明
 
-本servers是基于nodejs+mongodb开发的，以通过调用API的方式对外提供Image升级数据服务。
+本service是基于nodejs+mongodb开发的，以通过调用API的方式对外提供Image版本升级服务；
 
-文档的命名格式:`image_version-build_version-build.sh`
+文档的命名格式:`image_version-buildStart_version-buildEnd.sh`；
 
-目前版本暂不需要通过token验证即可调用，验证部分待后续补充。
+目前版本暂不需要通过token验证即可调用，验证部分待后续补充；
+
+设置filePath为虚拟属性，可以通过Schema.filePath获取。
 
 # 主要方法
 
@@ -39,7 +41,7 @@ deltaFile(optional) | `String` | 增量升级文件的名称
 
   success: status 200, json type datas
   fail: fail info
-  
+
 **Example**
 ```
 params:
@@ -47,9 +49,9 @@ params:
   "name": "alpine",
   "buildStart": "1.1.0-10",
   "buildEnd": "1.2.5-20"
-  
+
   ......
-  
+
 results
 [
   {
@@ -62,8 +64,7 @@ results
     "domainName": "192.168.2.102:41439",
     "__v": 0,
     "updatedOn": "2015-11-26T03:08:51.437Z",
-    "image": "alpine",
-    "filePath": "192.168.2.102:41439/files/alpine_1.0-1_1.0-2.sh/download"
+    "image": "alpine"
   },
   {
     "_id": "5656648402258a9814988341",
@@ -75,8 +76,7 @@ results
     "domainName": "192.168.2.102:41439",
     "__v": 0,
     "updatedOn": "2015-11-26T01:41:07.212Z",
-    "image": "alpine",
-    "filePath": "192.168.2.102:41439/files/alpine_0.1.2-12_0.1.8-16.sh/download"
+    "image": "alpine"
   }
 ]
 
@@ -86,7 +86,7 @@ results
 
 上传新的update文件
 
-## 文档的命名格式:image_version-build_version-build.sh
+## 文档的命名格式:image_version-buildStart_version-buildEnd.sh
 
 **Parameters**
 
@@ -102,15 +102,15 @@ file     |  `File`   | update文件
 
   success: status 200, json type datas
   fail: fail info
-  
+
 **Example**
 ```
 params:
 
   "file": "nodejs_0.1.2-12_0.1.8-16.sh"
-  
+
   ......
-  
+
 results
 {
   "__v": 0,
@@ -122,8 +122,7 @@ results
   "domainName": "192.168.2.102:41439",
   "_id": "5656aea1690bc094259da3ca",
   "updatedOn": "2015-11-26T07:02:31.509Z",
-  "image": "nodejs",
-  "filePath": "192.168.2.102:41439/files/nodejs_0.1.2-12_0.1.8-16.sh/download"
+  "image": "nodejs"
 }
 
 ```
@@ -145,15 +144,15 @@ filename     |  `String`   | update文件名
 
   success: status 200, file type datas
   fail: fail info
-  
+
 **Example**
 ```
 params:
 
   ':filename': nodejs_0.1.2-12_0.1.8-16.sh
-  
+
   ......
-  
+
 results
 
   nodejs_0.1.2-12_0.1.8-16.sh
@@ -178,7 +177,7 @@ Param   |  Type     |details
 
   success: status 200, json type datas
   fail: fail info
-  
+
 **Example**
 ```
 params:
@@ -198,8 +197,7 @@ results
   "domainName": "192.168.2.102:41439",
   "__v": 0,
   "updatedOn": "2015-11-26T03:08:51.437Z",
-  "image": "alpine",
-  "filePath": "192.168.2.102:41439/files/alpine_1.0-1_1.0-2.sh/download"
+  "image": "alpine"
 }
 
 ```
@@ -223,7 +221,7 @@ deltaFile  | `String`  |  文件名（格式转换为json）
 
   success: status 200, json type datas
   fail: fail info
-  
+
 **Example**
 ```
 params:
@@ -259,7 +257,7 @@ Param   |Type     |details
 
   success: status 200, json type datas
   fail: fail info
-  
+
 **Example**
 ```
 params:

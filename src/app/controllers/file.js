@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Module dependencies. 
+ * Module dependencies.
  */
 var mongoose = require('mongoose'),
   Files = mongoose.model('Files'),
@@ -13,20 +13,17 @@ exports.create = function(req,res){
   var file = req.files.file,
     filename = file.originalFilename,
     retVal = fileUpDown.parseFilename(filename);
-  
+
   var readyFile = new Files(retVal);
-  Files.find({deltaFile: readyFile.deltaFile}).exec(function(err,databack){
+  Files.find({ deltaFile: readyFile.deltaFile }).exec(function(err,databack){
     if(!databack.length){
-      readyFile.save(function(err){
+      readyFile.save(function(err, item){
         if(err){
           return res.status(400).send({
             message: errorHandler.getErrorMessage(err)
           });
         }else{
-          var prefile = JSON.stringify(readyFile),
-            retFile = JSON.parse(prefile);
-          retFile.filePath = retFile.domainName+'/files/'+retFile.deltaFile+'/download';
-          res.json(retFile);
+          res.json(item);
         }
       });
     }else{
@@ -37,10 +34,7 @@ exports.create = function(req,res){
 
 // file read
 exports.read = function(req,res){
-  var file = JSON.stringify(req.file),
-    retFile = JSON.parse(file);
-    retFile.filePath = retFile.domainName+'/files/'+retFile.deltaFile+'/download';
-  res.json(retFile);
+  res.json(req.file);
 };
 
 // file list
@@ -48,7 +42,7 @@ exports.list = function(req,res){
   var parseBuild = function(preBuild){
     var retBuild = preBuild.split('-');
     if(retBuild.length !== 2){
-      res.json({message:'Oops, bad buildStart/buildEnd format!!!'});
+      res.json({ message: 'Oops, bad buildStart/buildEnd format!!!' });
       return;
     }
     return retBuild[1];
@@ -58,15 +52,15 @@ exports.list = function(req,res){
     if(req.query.image){
       searchCon.image = req.query.image;
     }else{
-      res.json({message : 'Oops, bad image!!!'});
+      res.json({ message: 'Oops, bad image!!!' });
       return;
     }
     var buildStart = parseBuild(req.query.buildStart),
       buildEnd = parseBuild(req.query.buildEnd);
-    if(buildStart || buildEnd || (buildStart<buildEnd)){
+    if(buildStart && buildEnd && (buildStart<buildEnd)){
       searchCon.buildEnd = {$gt:buildStart,$lte:buildEnd};
     }else{
-      res.json({message:'Oops, bad buildStart/buildEnd format!!!'});
+      res.json({ message:'Oops, bad buildStart/buildEnd format!!!' });
       return;
     }
     if(req.query.deltaFile){
@@ -79,26 +73,14 @@ exports.list = function(req,res){
         message: errorHandler.getErrorMessage(err)
       });
     }else{
-      var retval = exports.addPath(files);
-      res.json(retval);
+      res.json(files);
     }
   });
 };
 
-exports.addPath = function(files){
-  var retFiles = JSON.stringify(files),
-    pureFiles = JSON.parse(retFiles); 
-    if(pureFiles.length){
-      for(var i in pureFiles){
-        pureFiles[i].filePath = pureFiles[i].domainName+'/files/'+pureFiles[i].deltaFile+'/download';
-      }
-      return pureFiles;
-    }
-};
-
 // file update image/deltaFile
 exports.update = function(req,res){
-  
+
   var file = req.file,
     originalFilename = req.file.deltaFile,
     currentFilename = req.body.deltaFile,
@@ -121,14 +103,14 @@ exports.update = function(req,res){
       res.json({message: currentFilename+' is existed!!!'});
     }
   });
-  
-  
+
+
 };
 
 // file delete
 exports.delete = function(req,res){
   var file = req.file;
-  
+
   file.remove(function(err){
     if(err){
       return res.status(400).send({

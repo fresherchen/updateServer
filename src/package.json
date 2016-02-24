@@ -25,7 +25,8 @@
     "lodash": "^3.10.0",
     "method-override": "^2.3.3",
     "mongoose": "~3.8.8",
-    "morgan": "^1.6.1"
+    "morgan": "^1.6.1",
+    "mkdirp":"^0.5.1"
   },
   "devDependencies": {
     "grunt-concurrent": "^2.0.0",
