@@ -8,6 +8,13 @@ var mongoose = require('mongoose'),
   fileUpDown = require('./file-updown'),
   _ = require('lodash');
 
+
+exports.index = function(req, res) {
+  res.render('index', {
+    title: 'UpdateService',
+    content: 'The UpdateService server is running!!!'
+  });
+};
 // file create
 exports.create = function(req,res){
   var file = req.files.file,

@@ -14,6 +14,7 @@ var fs = require('fs'),
   methodOverride = require('method-override'),
   helmet = require('helmet'),
   config = require('./config'),
+  consolidate = require('consolidate'),
   path = require('path');
 
 module.exports = function(db) {
@@ -43,6 +44,13 @@ module.exports = function(db) {
 
   // Showing stack errors
   app.set('showStackError', true);
+
+  // Set swig as the template engine
+  app.engine('html', consolidate[config.templateEngine]);
+
+  // Set views path and view engine
+  app.set('view engine', 'html');
+  app.set('views', './app/views');
 
   // Enable logger (morgan)
   app.use(morgan(logger.getLogFormat(), logger.getLogOptions()));

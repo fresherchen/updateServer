@@ -1,6 +1,11 @@
 'use strict';
 
 module.exports = {
+  app: {
+    title: 'UpdateService',
+    description: 'UpdateService',
+    keywords: 'LeadsUI, mongodb, node.js'
+  },
   port: process.env.PORT || 3000,
   templateEngine: 'swig',
   log: {

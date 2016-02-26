@@ -5,6 +5,7 @@ var fs = require('fs');
 module.exports = function(grunt) {
   // Unified Watch Object
   var watchFiles = {
+    serverViews: ['app/views/**/*.*'],
     serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js', '!app/tests/'],
     mochaTests: ['app/tests/**/*.js']
   };
@@ -13,6 +14,12 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     watch: {
+      serverViews: {
+        files: watchFiles.serverViews,
+        options: {
+          livereload: true
+        }
+      },
       serverJS: {
         files: watchFiles.serverJS,
         tasks: ['jshint'],
@@ -39,7 +46,7 @@ module.exports = function(grunt) {
         options: {
           nodeArgs: ['--debug'],
           ext: 'js,html',
-          watch: watchFiles.serverJS
+          watch: watchFiles.serverViews.concat(watchFiles.serverJS)
         }
       }
     },
