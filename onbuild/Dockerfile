@@ -22,7 +22,7 @@ COPY scripts /scripts
 
 # install npm packages
 COPY package.json ${APP_DIR}/package.json
-RUN cd ${APP_DIR} && npm config set registry https://registry.npm.taobao.org && sudo -u node -H npm install
+RUN cd ${APP_DIR} && sudo -u node -H npm install
 
 # copy code
 ONBUILD COPY src ${APP_DIR}
