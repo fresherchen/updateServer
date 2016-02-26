@@ -17,4 +17,4 @@ printf "Configuring image metadata ... "
 captool metadata --addimage -i updateservice -v ${UPDATESERVICE_VERSION} -b ${BUILD}
 printf "${green}OK\n${end}"
 
-echo "${yellow}UPDATESERVICE: Image installation completed.${end}"
+echo "${yellow}UPDATESERVICE: Pre-installation completed.${end}"
