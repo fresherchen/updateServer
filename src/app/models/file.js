@@ -30,12 +30,12 @@ var FileSchema = new Schema({
   versionEnd: {
     type: String
   },
-  deltaFile: {
+  updateFile: {
     type: String,
     trim: true,
     required: true
   },
-  domainName: {
+  hostname: {
     type: String,
     required: true
   },
@@ -47,7 +47,8 @@ var FileSchema = new Schema({
 
 // Define a virtual filePath
 FileSchema.virtual('filePath').get(function(){
-  return this.domainName +'/files/'+ this.deltaFile +'/download';
+  // need parse something to gain the domain name
+  return 'update.leadstec.com/files/'+ this.updateFile +'/download?hostname='+ this.hostname;
 });
 
 mongoose.model('Files',FileSchema);

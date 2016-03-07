@@ -8,7 +8,6 @@ dev:
   volumes:
     - /var/lib/docker/vfs/dir/logcenter/update-dev.microservice.com:/data/log
     - /var/lib/docker/vfs/dir/datacenter/update-dev.microservice.com:/data/persist
-    - /var/lib/docker/vfs/dir/filecenter/update-dev.microservice.com:/data/file
   environment:
     - EMAIL=jpchen@leadstec.com
     - ENGINE=localhost

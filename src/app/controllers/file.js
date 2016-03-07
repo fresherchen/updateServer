@@ -5,7 +5,7 @@
 var mongoose = require('mongoose'),
   Files = mongoose.model('Files'),
   errorHandler = require('./errors'),
-  fileUpDown = require('./file-updown'),
+  fileLoad = require('./file-load'),
   _ = require('lodash');
 
 
@@ -19,10 +19,10 @@ exports.index = function(req, res) {
 exports.create = function(req,res){
   var file = req.files.file,
     filename = file.originalFilename,
-    retVal = fileUpDown.parseFilename(filename);
+    retVal = fileLoad.parseFilename(filename);
 
   var readyFile = new Files(retVal);
-  Files.find({ deltaFile: readyFile.deltaFile }).exec(function(err,databack){
+  Files.find({ updateFile: readyFile.updateFile }).exec(function(err,databack){
     if(!databack.length){
       readyFile.save(function(err, item){
         if(err){
@@ -34,7 +34,7 @@ exports.create = function(req,res){
         }
       });
     }else{
-      res.json({message:'this '+readyFile.deltaFile+' has existed !!!'});
+      res.json({message:'this '+readyFile.updateFile+' has existed !!!'});
     }
   });
 };
@@ -70,8 +70,8 @@ exports.list = function(req,res){
       res.json({ message:'Oops, bad buildStart/buildEnd format!!!' });
       return;
     }
-    if(req.query.deltaFile){
-      searchCon.deltaFile = req.query.deltaFile;
+    if(req.query.updateFile){
+      searchCon.updateFile = req.query.updateFile;
     }
   }
   Files.find(searchCon).sort({ buildEnd: 1 }).exec(function(err,files){
@@ -85,14 +85,14 @@ exports.list = function(req,res){
   });
 };
 
-// file update image/deltaFile
+// file update image/updateFile
 exports.update = function(req,res){
 
   var file = req.file,
-    originalFilename = req.file.deltaFile,
-    currentFilename = req.body.deltaFile,
-    retVal = fileUpDown.parseFilename(currentFilename);
-  Files.find({deltaFile: currentFilename}).exec(function(err,databack){
+    originalFilename = req.file.updateFile,
+    currentFilename = req.body.updateFile,
+    retVal = fileLoad.parseFilename(currentFilename);
+  Files.find({updateFile: currentFilename}).exec(function(err,databack){
     if(!databack.length){
       var readyFile  = _.extend(file, retVal);
       readyFile.save(function(err){
@@ -101,7 +101,7 @@ exports.update = function(req,res){
             message: errorHandler.getErrorMessage(err)
           });
         }else{
-          fileUpDown.renamefile(originalFilename, currentFilename,function(path){
+          fileLoad.renamefile(originalFilename, currentFilename,function(path){
             res.json(path);
           });
         }
@@ -124,7 +124,7 @@ exports.delete = function(req,res){
         message: errorHandler.getErrorMessage(err)
       });
     }else{
-      fileUpDown.removefile(file.deltaFile,function(back){
+      fileLoad.removefile(file.updateFile,function(back){
         res.json(back);
       });
     }

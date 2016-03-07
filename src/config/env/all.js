@@ -2,9 +2,9 @@
 
 module.exports = {
   app: {
-    title: 'UpdateService',
-    description: 'UpdateService',
-    keywords: 'LeadsUI, mongodb, node.js'
+    title: '{{UPDATE_TITLE}}',
+    description: '{{UPDATE_DESC}}',
+    keywords: 'mongodb, node.js'
   },
   port: process.env.PORT || 3000,
   templateEngine: 'swig',

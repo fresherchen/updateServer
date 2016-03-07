@@ -1,4 +1,4 @@
-# Update Service API Reference 0.1.2
+# Update Service API Reference 0.2.0
 
 ***
 
@@ -31,7 +31,7 @@ Param   |  Type     |details
 image   |  `String`   | image的名称
 buildStart | `Number` | 增量升级文件起始version-build
 buildEnd |  `Number`  | 增量升级文件目标version-build
-deltaFile(optional) | `String` | 增量升级文件的名称
+updateFile(optional) | `String` | 增量升级文件的名称
 
 **Request Method**
 
@@ -55,27 +55,27 @@ params:
 results
 [
   {
-    "_id": "565677d017767c8417063a6f",
-    "versionStart": "1.0",
-    "versionEnd": "1.0",
-    "buildStart": 1,
-    "buildEnd": 2,
-    "deltaFile": "alpine_1.0-1_1.0-2.sh",
-    "domainName": "192.168.2.102:41439",
-    "__v": 0,
-    "updatedOn": "2015-11-26T03:08:51.437Z",
-    "image": "alpine"
-  },
-  {
-    "_id": "5656648402258a9814988341",
+    "_id": "56d94bef36dd0a6504978b5d",
     "versionStart": "0.1.2",
     "versionEnd": "0.1.8",
     "buildStart": 12,
     "buildEnd": 16,
-    "deltaFile": "alpine_0.1.2-12_0.1.8-16.sh",
-    "domainName": "192.168.2.102:41439",
+    "updateFile": "alpine_0.1.2-12_0.1.8-16.sh",
+    "hostname": "www.nodechen.com",
     "__v": 0,
-    "updatedOn": "2015-11-26T01:41:07.212Z",
+    "updatedOn": "2016-03-04T08:45:50.522Z",
+    "image": "alpine"
+  },
+  {
+    "_id": "56d94bf436dd0a6504978b5f",
+    "versionStart": "0.1.2",
+    "versionEnd": "0.1.8",
+    "buildStart": 17,
+    "buildEnd": 19,
+    "updateFile": "alpine_0.1.2-17_0.1.8-19.sh",
+    "hostname": "www.nodechen.com",
+    "__v": 0,
+    "updatedOn": "2016-03-04T08:45:50.522Z",
     "image": "alpine"
   }
 ]
@@ -107,7 +107,7 @@ file     |  `File`   | update文件
 ```
 params:
 
-  "file": "nodejs_0.1.2-12_0.1.8-16.sh"
+  "file": "centos_0.1.2-12_0.1.8-16.sh"
 
   ......
 
@@ -118,11 +118,11 @@ results
   "versionEnd": "0.1.8",
   "buildStart": 12,
   "buildEnd": 16,
-  "deltaFile": "nodejs_0.1.2-12_0.1.8-16.sh",
-  "domainName": "192.168.2.102:41439",
-  "_id": "5656aea1690bc094259da3ca",
-  "updatedOn": "2015-11-26T07:02:31.509Z",
-  "image": "nodejs"
+  "updateFile": "centos_0.1.2-12_0.1.8-16.sh",
+  "hostname": "www.nodechen.com",
+  "_id": "56d950549b620b8804a22ba4",
+  "updatedOn": "2016-03-04T09:04:57.065Z",
+  "image": "centos"
 }
 
 ```
@@ -135,6 +135,7 @@ results
 Param   |  Type     |details
 ---------|-------------|---------------------
 filename     |  `String`   | update文件名
+hostname     |  `String`   | hostname
 
 **Request Method**
 
@@ -150,6 +151,7 @@ filename     |  `String`   | update文件名
 params:
 
   ':filename': nodejs_0.1.2-12_0.1.8-16.sh
+  hostname: www.nodechen.com
 
   ......
 
@@ -182,22 +184,22 @@ Param   |  Type     |details
 ```
 params:
 
-  :fileId 替换为 565677d017767c8417063a6f
+  :fileId 替换为 56d950549b620b8804a22ba4
 
   ......
 
 results
 {
-  "_id": "565677d017767c8417063a6f",
-  "versionStart": "1.0",
-  "versionEnd": "1.0",
-  "buildStart": 1,
-  "buildEnd": 2,
-  "deltaFile": "alpine_1.0-1_1.0-2.sh",
-  "domainName": "192.168.2.102:41439",
+  "_id": "56d950549b620b8804a22ba4",
+  "versionStart": "0.1.2",
+  "versionEnd": "0.1.8",
+  "buildStart": 12,
+  "buildEnd": 16,
+  "updateFile": "centos_0.1.2-12_0.1.8-16.sh",
+  "hostname": "www.nodechen.com",
   "__v": 0,
-  "updatedOn": "2015-11-26T03:08:51.437Z",
-  "image": "alpine"
+  "updatedOn": "2016-03-04T09:04:57.065Z",
+  "image": "centos"
 }
 
 ```
@@ -211,7 +213,7 @@ results
 Param   |  Type     |details
 ---------|-------------|---------------------
 :fileId |  `String`  |  文件id
-deltaFile  | `String`  |  文件名（格式转换为json）
+updateFile  | `String`  |  文件名（格式转换为json）
 
 **Request Method**
 
@@ -229,13 +231,13 @@ params:
   :fileId 替换为 565677d017767c8417063a6f
 
 {
-   "deltaFile": "alpine_0.1.2-11_0.1.8-12.sh"
+   "updateFile": "alpine_0.1.2-11_0.1.8-12.sh"
 }
   ......
 
 results
 
-"currentPath: /data/file/alpine/alpine_0.1.2-11_0.1.8-12.sh"
+"currentPath: /data/app/files_update/alpine/alpine_0.1.2-11_0.1.8-12.sh"
 
 ```
 
