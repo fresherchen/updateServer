@@ -28,5 +28,8 @@ module.exports = function(app){
   app.route('/files/:filename/load')
   .get(checkToken.checkTokeninUrl,fileLoad.downloadfile);
 
+  app.route('/images')
+  .get(checkToken.checkForUpdate);
+
   app.param('fileId',file.fileById);
 };
