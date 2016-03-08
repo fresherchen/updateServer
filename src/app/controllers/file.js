@@ -110,8 +110,6 @@ exports.update = function(req,res){
       res.json({message: currentFilename+' is existed!!!'});
     }
   });
-
-
 };
 
 // file delete
