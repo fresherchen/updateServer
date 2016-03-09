@@ -6,7 +6,7 @@
 var fs = require('fs'),
   Files = require('./file'),
   Path = require('path');
-var  mkdirp = require('mkdirp');
+var mkdirp = require('mkdirp');
 var os = require('os'),
     http = require('http');
 var hostname = os.hostname();
@@ -67,7 +67,7 @@ exports.getlocation = function(req,res){
   if(host === hostname){
     exports.downloadfile(req,res);
   }else{
-    res.send({message: 'This method need rewrite if needed!!!'});
+    res.send({message: 'This method need to rewrite if needed!!!'});
     // var fs = require('fs');
     // var file = fs.createWriteStream('/data/app/files_update/'+ req.params.filename);
     // // 'http://192.168.2.102:41436/files/'+ req.params.filename +'/load'

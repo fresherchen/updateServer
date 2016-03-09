@@ -107,7 +107,7 @@ exports.update = function(req,res){
         }
       });
     }else{
-      res.json({message: currentFilename+' is existed!!!'});
+      res.json({ message: currentFilename+' is existed!!!' });
     }
   });
 };

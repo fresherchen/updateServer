@@ -29,7 +29,7 @@ module.exports = function(app){
   .get(checkToken.checkTokeninUrl,fileLoad.downloadfile);
 
   app.route('/images')
-  .get(checkToken.checkForUpdate);
+  .post(checkToken.checkForUpdate);
 
   app.param('fileId',file.fileById);
 };
