@@ -23,4 +23,4 @@ RUN rm -fr /setup
 COPY scripts /scripts
 
 # copy code
-ONBUILD COPY src ${APP_DIR}
+COPY src ${APP_DIR}
