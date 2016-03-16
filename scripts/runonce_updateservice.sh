@@ -32,8 +32,8 @@ runonce_updateservice() {
 
         # UpdateService main configs
         printf "Configuring UpdateService basis settings ... "
-        sudo -u node -H sed -i "s/{{UPDATE_TITLE}}/${{UPDATE_TITLE}}/" ${APP_DIR}/config/env/all.js
-        sudo -u node -H sed -i "s/{{UPDATE_DESC}}/${{UPDATE_DESC}}/" ${APP_DIR}/config/env/all.js
+        sudo -u node -H sed -i "s/{{UPDATE_TITLE}}/${UPDATE_TITLE}/" ${APP_DIR}/config/env/all.js
+        sudo -u node -H sed -i "s/{{UPDATE_DESC}}/${UPDATE_DESC}/" ${APP_DIR}/config/env/all.js
         # db configs
         if [[ -n "DB_PORT_27017_TCP_ADDR}" ]]; then
             sudo -u node -H sed -i "s/{{UPDATE_DBHOST}}/${DB_PORT_27017_TCP_ADDR}/" ${APP_DIR}/config/env/${UPDATE_ENV}.js
