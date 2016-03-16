@@ -1,4 +1,4 @@
-# Update Service API Reference 0.1.1
+# Update Service API Reference 0.2.0
 
 ***
 
@@ -6,12 +6,12 @@ Update Service 运行环境，适用于研发及部署。
 
 本镜像提供：
 
-* update service 0.1.1
+* update service 0.2.0
 * Node.js 0.12.3
 * Npm 2.7.4
 * Node Packages:
     - grunt
-    
+
 继承关系：update service -->nodejs
 
 # 使用说明
@@ -40,7 +40,6 @@ container路径  | Host存放位置  | 说明
 -------------|--------------|------------------
 /data/log | logcenter   | 继承自alpine
 /data/persist  |datacenter  | 继承自alphine
-/data/file  |filecenter  | 自有文件夹
 /data/app |datacenter  |不建议代码做volume
 
 # 实例
@@ -57,7 +56,6 @@ file:
   volumes:
   	- /var/lib/docker/vfs/dir/logcenter/updateservice.localhost:/data/log
   	- /var/lib/docker/vfs/dir/datacenter/updateservice.localhost:/data/persist
-  	- /var/lib/docker/vfs/dir/filecenter/updateservice.localhost:/data/file
   environment:
   	- EMAIL=user@example.com
   	- ENGINE=localhost

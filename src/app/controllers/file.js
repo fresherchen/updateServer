@@ -12,7 +12,7 @@ var mongoose = require('mongoose'),
 exports.index = function(req, res) {
   res.render('index', {
     title: 'UpdateService',
-    content: 'The UpdateService server is running!!!'
+    content: 'The UpdateService server is running ~'
   });
 };
 // file create

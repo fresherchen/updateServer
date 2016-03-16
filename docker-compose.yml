@@ -13,6 +13,8 @@ dev:
     - ENGINE=localhost
     - ENABLE_SSHD=true
     - UPDATE_ENV=development
+    - UPDATE_TITLE=UpdateService
+    - UPDATE_DESC=UpdateService
     - PORT=3000
     - UPDATE_DBNAME=updateservice
   links:
