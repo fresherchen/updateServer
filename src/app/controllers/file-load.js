@@ -71,7 +71,7 @@ exports.getlocation = function(req,res){
     // var fs = require('fs');
     // var file = fs.createWriteStream('/data/app/files_update/'+ req.params.filename);
     // // 'http://192.168.2.102:41436/files/'+ req.params.filename +'/load'
-    // var request = http.get('http://'+host+'/files/'+ req.params.filename +'/load', function(response) {
+    // var httprequest = http.get('http://'+host+'/files/'+ req.params.filename +'/load', function(response) {
     //   response.pipe(file);
       // res.sendFile('/data/app/files_update'+req.params.filename);
       // res.download('/data/file/'+req.params.filename,function(err){

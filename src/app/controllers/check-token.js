@@ -23,7 +23,8 @@ exports.checkTokeninBody = function(req,res,next){
 // check for updating or not
 exports.checkForUpdate = function(req,res){
     var imageBack = [],
-      require;
+      temp = [],
+      httprequest;
     for(var i in req.body){
       var imageObj = req.body[i];
       if(!imageObj){
@@ -38,8 +39,15 @@ exports.checkForUpdate = function(req,res){
         res.send({ message: 'Oops, buildEnd params is demanded!!!' });
         return;
       }
-      var image = imageObj.image;
-      require = http.get('http://reg.leadstec.com/v2/'+image+'/tags/list',function(response){
+      var image = imageObj.image,
+        preImage = image.split('/');
+      if(preImage.length !== 2){
+        res.send({ message: 'Oops, image params is demanded!!!' });
+      }
+      var hostname = preImage[0],
+        imageName = preImage[1];
+        temp.push({image:imageName,buildEnd:imageObj.buildEnd});
+      httprequest = http.get('http://'+hostname+'/v2/'+imageName+'/tags/list',function(response){
         response.on('data',function (chunk) {
           var images = JSON.parse(chunk),
             ascTags = images.tags.sort(),
@@ -51,23 +59,31 @@ exports.checkForUpdate = function(req,res){
           }
           var latestBuild = latestVersionBuild[1],
             returnVal = {
-            image:image,
+            latestBuild:latestBuild,
+            image:images.name,
             versionBuild:ascTags[ascTags.length-2]
           };
-          if(req.query.buildEnd === latestBuild) {
-            returnVal.update = false;
-            imageBack.push(returnVal);
-          }else{
-            returnVal.update = true;
-            imageBack.push(returnVal);
-          }
+          imageBack.push(returnVal);
           if(imageBack.length === req.body.length){
+            for(var t in temp){
+              for(var r in imageBack){
+                if(temp[t].image === imageBack[r].image){
+                  if(temp[t].buildEnd === imageBack[r].latestBuild){
+                    delete imageBack[r].latestBuild;
+                    imageBack[r].update = false;
+                  }else{
+                    delete imageBack[r].latestBuild;
+                    imageBack[r].update = true;
+                  }
+                }
+              }
+            }
             res.json(imageBack);
           }
         });
       });
     }
-    require.on('error', function(e) {
+    httprequest.on('error', function(e) {
       console.log('get error: ' + e.message);
     });
   };

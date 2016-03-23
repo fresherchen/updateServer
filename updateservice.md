@@ -14,6 +14,9 @@ Update Service  API Docs
 
 设置filePath为虚拟属性，可以通过Schema.filePath获取。
 
+Example:
+update.leadstec.com/files/alpine_0.1.2-12_0.1.8-16.sh/download?hostname=update.leadstec.com
+
 # 主要方法
 
 ## File
@@ -126,7 +129,7 @@ results
 }
 
 ```
-### http://[baseUrl]/files/:filename/download
+### http://[baseUrl]/files/:filename/download?hostname=[hosename]
 
 通过文件名获取（下载）文件
 
