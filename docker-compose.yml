@@ -1,24 +1,3 @@
-app:
-  build: .
-  ports:
-    - "41439:3000"
-    - "41438:22"
-  volumes:
-    - /var/lib/docker/vfs/dir/logcenter/update-dev.microservice.com:/data/log
-    - /var/lib/docker/vfs/dir/datacenter/update-dev.microservice.com:/data/persist
-  environment:
-    - EMAIL=jpchen@leadstec.com
-    - ENGINE=localhost
-    - ENABLE_SSHD=true
-    - NODE_ENV=development
-    - UPDATE_TITLE=UpdateService
-    - UPDATE_DESC=UpdateService
-    - PORT=3000
-    - UPDATE_DBNAME=updateservice
-  links:
-    - devdb:db
-  hostname: update-dev.microservice.com
-  restart: always
 devdb:
   image: reg.leadstec.com/mongo:latest
   ports:
@@ -33,4 +12,26 @@ devdb:
     - MONGO_TYPE=normal
     - MONGOD_ENABLE_SMALLFILES=true
   hostname: update-dev-db.microservice.com
+  restart: always
+app:
+  build: .
+  ports:
+    - "41439:3000"
+    - "41438:22"
+  volumes:
+    - /var/lib/docker/vfs/dir/logcenter/update-dev.microservice.com:/data/log
+    - /var/lib/docker/vfs/dir/datacenter/update-dev.microservice.com:/data/persist
+    - /var/lib/docker/vfs/dir/dbcenter/update-dev.microservice.com:/data/file
+  environment:
+    - EMAIL=jpchen@leadstec.com
+    - ENGINE=localhost
+    - ENABLE_SSHD=true
+    - NODE_ENV=development
+    - UPDATE_TITLE=UpdateService
+    - UPDATE_DESC=UpdateService
+    - PORT=3000
+    - UPDATE_DBNAME=updateservice
+  links:
+    - devdb:db
+  hostname: update-dev.microservice.com
   restart: always

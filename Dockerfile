@@ -1,14 +1,15 @@
 #
 # AUTHOR            Jpchen <jpchen@leadstec.com>
-# DOCKER-VERSION    1.8.2
+# DOCKER-VERSION    1.9.2
 # Copyright         (C) 2016 Leads Technologies Ltd. All rights reserved.
 #
 # Description       Dockerfile for UpdateService image base on nodejs
 #
-FROM  edu.lxpt.cn/updateservice-tpl:latest
+FROM  edu.lxpt.cn/updateservice_base:latest
 MAINTAINER Jpchen <jpchen@leadstec.com>
+LABEL leadstec-update-build="0.2.1-{{PIPELINE_BUILD_NUMBER}}"
 
-ENV UPDATESERVICE_VERSION 0.2.0
+ENV UPDATE_VERSION 0.2.1
 
 # install packages
 RUN apk --update add gcc g++ make
