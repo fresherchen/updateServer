@@ -1,6 +1,6 @@
 #
 # AUTHOR            Jpchen <jpchen@leadstec.com>
-# DOCKER-VERSION    1.9.2
+# DOCKER-VERSION    1.9.1
 # Copyright         (C) 2016 Leads Technologies Ltd. All rights reserved.
 #
 # Description       Dockerfile for UpdateService image base on nodejs
