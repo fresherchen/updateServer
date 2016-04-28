@@ -24,6 +24,7 @@
     "grunt": "0.4.5",
     "helmet": "~0.9.1",
     "lodash": "^3.10.0",
+    "lowdb": "^0.12.5",
     "method-override": "^2.3.3",
     "mkdirp":"^0.5.1",
     "mongoose": "~3.8.8",
