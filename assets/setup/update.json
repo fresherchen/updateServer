@@ -48,6 +48,18 @@
       ]
     },
     {
+      "name": "DB_PORT_27017_TCP_ADDR",
+      "default": "",
+      "replacements": [
+        {
+          "pattern": "{{UPDATE_DBHOST}}",
+          "path": "${APP_DIR}/config/env/${NODE_ENV}.js",
+          "sudo": "node",
+          "type": "3"
+        }
+      ]
+    },
+    {
       "name": "UPDATE_DBNAME",
       "default": "updateservice",
       "replacements": [

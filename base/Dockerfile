@@ -9,7 +9,8 @@ FROM       reg.leadstec.com/nodejs:latest
 MAINTAINER Jpchen <jpchen@leadstec.com>
 
 # install packages
-RUN apk --update add gcc g++ make
+RUN apk --update add make git nodejs && \
+    rm /var/cache/apk/*
 
 # install npm packages
 COPY package.json ${APP_DIR}/package.json

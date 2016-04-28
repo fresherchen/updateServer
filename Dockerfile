@@ -9,10 +9,12 @@ FROM  edu.lxpt.cn/updateservice_base:latest
 MAINTAINER Jpchen <jpchen@leadstec.com>
 LABEL leadstec-update-build="0.2.1-{{PIPELINE_BUILD_NUMBER}}"
 
-ENV UPDATE_VERSION 0.2.1
+# set environment variables
+ENV UPDATE_VERSION="0.2.1"
 
 # install packages
-RUN apk --update add gcc g++ make
+RUN apk --update add make git nodejs && \
+    rm /var/cache/apk/*
 
 # add metadate
 COPY assets/setup /setup

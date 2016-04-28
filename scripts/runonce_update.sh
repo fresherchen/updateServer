@@ -13,9 +13,9 @@ runonce_update() {
     # Determine new install or restoring
     if [[ ${LCS_NEW_INSTALL} == true ]]; then
         # initial envs from user inputs and defaults
-        lcs-rt --envs update
-        # source the generated envs.sh
-        source ${LCS_STORAGE_DIR}/envs.sh
+        lcs-rt --envs update && source ${ENVS_FILE}
+
+        # custom code after envs initialized
     else
         # custom code when restore
         notify success "Update restored."

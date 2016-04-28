@@ -113,7 +113,6 @@ exports.checkForUpdate = function(req, res) {
       handleImage(i, count, temp, imageBack, req, res);
       continue;
     }
-
     if (!imageObj.image) {
       console.dir({message: 'Bad image !!!'});
       handleImage(i, count, temp, imageBack, req, res);
