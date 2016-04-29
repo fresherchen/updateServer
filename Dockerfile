@@ -5,7 +5,7 @@
 #
 # Description       Dockerfile for UpdateService image base on nodejs
 #
-FROM  edu.lxpt.cn/updateservice_base:latest
+FROM  edu.lxpt.cn/update_base:latest
 MAINTAINER Jpchen <jpchen@leadstec.com>
 LABEL leadstec-update-build="0.2.1-{{PIPELINE_BUILD_NUMBER}}"
 
