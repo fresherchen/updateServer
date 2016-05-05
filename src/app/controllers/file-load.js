@@ -12,7 +12,6 @@ var os = require('os'),
 var hostname = os.hostname();
 
 exports.uploadfile = function(req,res){
-
   var file = req.files.file;
     if(!file) {
       res.send({message: 'No file is uploading!!!'});

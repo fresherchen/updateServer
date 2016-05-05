@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
   Files = mongoose.model('Files'),
   errorHandler = require('./errors'),
   fileLoad = require('./file-load'),
+  fs = require('fs'),
   _ = require('lodash');
 
 
@@ -15,6 +16,23 @@ exports.index = function(req, res) {
     content: 'The UpdateService server is running ~'
   });
 };
+
+exports.getApi = function(req,res){
+  var varUrl = (req.url).split('/');
+  var filename = varUrl[2];
+  var path = '/data/app/app/api/'+filename;
+  console.dir(path);
+  fs.stat(path,function(err,s){
+    if(!err && s.isFile()){
+      var readable = fs.createReadStream(path,'utf-8');
+      res.writeHead(200,{'Content-Type':'application/json'});
+      readable.pipe(res);
+    }else{
+      res.json({ message: 'Failed to load '+filename });
+    }
+  });
+};
+
 // file create
 exports.create = function(req,res){
   var file = req.files.file,

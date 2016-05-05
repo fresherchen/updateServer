@@ -1,0 +1,407 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample update server.\n\n1、本service是基于nodejs+mongodb+lowdb开发的，以调用API的方式对外提供Update服务；\n\n2、文档的命名格式：`image_version-buildStart_version-buildEnd.sh`；\n\n3、目前版本暂不需要通过token验证即可调用，验证部分待后续补充；\n\n4、设置filePath为虚拟属性，可以通过Schema.filePath获取。\n\nExample:update.leadstec.com/files/alpine_0.1.2-12_0.1.8-16.sh/download?hostname=update.leadstec.com\n",
+        "version": "0.2.0",
+        "title": "Update service API Reference",
+        "contact": {
+            "name": "jpchen@leadstec.com"
+        }
+    },
+    "host": "192.168.2.102:41434",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/{filename}": {
+            "get": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Get the api json file",
+                "description": "json 格式文档",
+                "operationId": "getApi",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "filename",
+                        "description": "api文档的名字",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success operation",
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                }
+            }
+        },
+        "/files": {
+            "get": {
+                "tags": [
+                    "file"
+                ],
+                "summary": "Get the files list by condition",
+                "description": "",
+                "operationId": "getFiles",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "image",
+                        "description": "image的名字",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "buildStart",
+                        "description": "image升级的起始version-build",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "buildEnd",
+                        "description": "image升级的目标version-build",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "updateFile",
+                        "description": "image升级的文件名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "count",
+                        "description": "页码",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "每页数量",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sort",
+                        "description": "排序方式，如：`buildEnd(default)/-buildEnd/(-)buildStart/(-)updateFile/(-)updatedOn`",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/File"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "file"
+                ],
+                "summary": "Add a new file",
+                "description": "",
+                "operationId": "addFile",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "description": "image to be set as profile image",
+                        "type": "file",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/File"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "update_auth": [
+                            "write_rest",
+                            "read_rest"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/files/{filename}/download": {
+            "get": {
+                "tags": [
+                    "file"
+                ],
+                "summary": "Download file by name and hostname",
+                "description": "Returns a file",
+                "operationId": "download file",
+                "produces": [
+                    "multipart/form-data",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "filename",
+                        "description": "name of the file that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "hostname",
+                        "description": "hostname of the file stored",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful get",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid name supplied"
+                    },
+                    "404": {
+                        "description": "File not found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    },
+                    {
+                        "update_auth": [
+                            "write_rest",
+                            "read_rest"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/files/{fileId}": {
+            "get": {
+                "tags": [
+                    "file"
+                ],
+                "summary": "Find file info by ID",
+                "description": "Returns a file's info",
+                "operationId": "getFileById",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "fileId",
+                        "description": "ID of file that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful get",
+                        "schema": {
+                            "$ref": "#/definitions/File"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "file not found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    },
+                    {
+                        "update_auth": [
+                            "write_rest",
+                            "read_rest"
+                        ]
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "file"
+                ],
+                "summary": "Update a file",
+                "description": "",
+                "operationId": "updateFile",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "fileId",
+                        "description": "ID of file that needs to be updated",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/File"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success updated!",
+                        "schema": {
+                            "$ref": "#/definitions/File"
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "update_auth": [
+                            "write_rest",
+                            "read_rest"
+                        ]
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "file"
+                ],
+                "summary": "Deletes a file",
+                "description": "",
+                "operationId": "deleteFileInfo",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "fileId",
+                        "description": "file id to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success deleted!"
+                    },
+                    "400": {
+                        "description": "Invalid restaurant value"
+                    }
+                },
+                "security": [
+                    {
+                        "update_auth": [
+                            "write_rest",
+                            "read_rest"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "securityDefinitions": {
+        "api_key": {
+            "type": "apiKey",
+            "name": "api_key",
+            "in": "header"
+        },
+        "update_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "http://id.leadstec.com/auth/",
+            "flow": "implicit",
+            "scopes": {
+                "write_rest": "modify rest in your account",
+                "read_rest": "read your rest"
+            }
+        }
+    },
+    "definitions": {
+        "File": {
+            "type": "object",
+            "required": [
+                "updateFile"
+            ],
+            "properties": {
+                "image": {
+                    "type": "string",
+                    "example": "alpine"
+                },
+                "buildStart": {
+                    "type": "number",
+                    "format": "int32"
+                },
+                "buildEnd": {
+                    "type": "number",
+                    "format": "int32"
+                },
+                "versionStart": {
+                    "type": "string"
+                },
+                "versionEnd": {
+                    "type": "string"
+                },
+                "updateFile": {
+                    "type": "string"
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "updatedOn": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}

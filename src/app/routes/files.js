@@ -28,6 +28,9 @@ module.exports = function(app){
   app.route('/files/:filename/load')
   .get(checkToken.checkTokeninUrl,fileLoad.downloadfile);
 
+  app.route('/api/:filename')
+  .get(checkToken.checkTokeninUrl,file.getApi);
+
   app.route('/images')
   .post(checkToken.checkForUpdate);
 

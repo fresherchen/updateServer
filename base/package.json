@@ -6,7 +6,7 @@
   "author": "Jpchen <jpchen@leadstec.com>",
   "license": "Leadstec Commercial License",
   "engines": {
-    "node": ">=0.12.3",
+    "node": ">=4.3.0",
     "npm": ">=1.4.28"
   },
   "scripts": {
