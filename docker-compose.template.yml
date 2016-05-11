@@ -12,7 +12,7 @@ devdb:
   hostname: update-dev-db.microservice.com
   restart: always
 app:
-  build: .
+  image: edu.lxpt.cn/update:latest
   ports:
     - "41439:3000"
     - "41438:22"
