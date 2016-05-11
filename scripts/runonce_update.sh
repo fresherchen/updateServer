@@ -5,7 +5,7 @@
 #
 runonce_update() {
 
-    notify title "UPDATE: Initialize container settings ..."
+    notify title "UPDATE: Initialize container settings ... "
 
     # Fixing working directory permissions
     lcs-rt --fix-perm update
@@ -18,7 +18,7 @@ runonce_update() {
         # custom code after envs initialized
     else
         # custom code when restore
-        notify success "Update restored."
+        notify success "UPDATE restored."
     fi
 
     # Persist directories and files

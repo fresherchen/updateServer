@@ -7,8 +7,8 @@ Update Service 运行环境，适用于研发及部署。
 本镜像提供：
 
 * update service 0.2.0
-* Node.js 0.12.3
-* Npm 2.7.4
+* Node.js 4.3.0
+* Npm 3.8.7
 * Node Packages:
     - grunt
 
@@ -74,12 +74,12 @@ db:
    	 - "41204:28017"
    volumes:
      - /var/lib/docker/vfs/dir/logcenter/updateservice-db.example.com:/data/log
+     - /var/lib/docker/vfs/dir/dbcenter/updateservice-db.example.com:/data/db
      - /var/lib/docker/vfs/dir/datacenter/updateservice-db.example.com:/data/persist
    links:
      - db:db
    environment:
      - EMAIL=user@example.com
-     - ENGINE=localhost
    hostname: updateservice.example.com
 ```
 
