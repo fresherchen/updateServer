@@ -1,4 +1,4 @@
-# Update Service API Reference 0.2.0
+# Update Service API Reference 0.2.1
 
 ***
 
@@ -6,7 +6,7 @@ Update Service 运行环境，适用于研发及部署。
 
 本镜像提供：
 
-* update service 0.2.0
+* update service 0.2.1
 * Node.js 4.3.0
 * Npm 3.8.7
 * Node Packages:
@@ -22,7 +22,7 @@ Update Service 运行环境，适用于研发及部署。
 
 名称 |位置              |说明
 --------|--------------------------|-----------------
-初始化 | /script/runonce_updateservice.sh   | 只有首次启动执行
+初始化 | /script/runonce_update.sh   | 只有首次启动执行
 
 ### PORTS
 
