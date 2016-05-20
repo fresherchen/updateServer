@@ -8,7 +8,7 @@
             "name": "jpchen@leadstec.com"
         }
     },
-    "host": "192.168.2.102:41434",
+    "host": "update.leadstec.com",
     "schemes": [
         "http"
     ],
@@ -41,6 +41,40 @@
                         "description": "success operation",
                         "schema": {
                             "type": "file"
+                        }
+                    }
+                }
+            }
+        },
+        "/images": {
+            "post": {
+                "tags": [
+                    "image"
+                ],
+                "summary": "Check if the image need to update",
+                "description": "",
+                "operationId": "checkUpdate",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "image",
+                        "description": "registry path and image name,eg:'reg.leadstec.com/alpine'",
+                        "type": "number",
+                        "required": true
+                    },
+                    {
+                        "name": "buildEnd",
+                        "in": "formData",
+                        "description": "image build number,eg:'5'",
+                        "type": "number",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success operation",
+                        "schema": {
+                            "type": "object"
                         }
                     }
                 }
