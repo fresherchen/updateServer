@@ -5,7 +5,7 @@ set -e
 notify title "UPDATE: Pre-installation starts ..."
 
 # copy schema and add to metadata
-cp -f /setup/update.json ${LCS_HOME}/schema/update.json
+cp -f /scripts/setup/update.json ${LCS_HOME}/schema/update.json
 lcs-bt --append update
 
 # complete

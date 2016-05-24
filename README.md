@@ -50,16 +50,16 @@ container路径  | Host存放位置  | 说明
 
 ```
 file:
-  image: reg.leadstec.com/updateservice:latest
+  image: reg.leadstec.com/update:latest
   ports:
   	- "41201:3000"
   volumes:
-  	- /var/lib/docker/vfs/dir/logcenter/updateservice.localhost:/data/log
-  	- /var/lib/docker/vfs/dir/datacenter/updateservice.localhost:/data/persist
+  	- /var/lib/docker/vfs/dir/logcenter/update.localhost:/data/log
+  	- /var/lib/docker/vfs/dir/datacenter/update.localhost:/data/persist
   environment:
   	- EMAIL=user@example.com
   	- ENGINE=localhost
-  hostname: updateservice.localhost
+  hostname: update.localhost
 ```
 
 ### Link Container
@@ -73,14 +73,14 @@ db:
    	 - "41203:27017"
    	 - "41204:28017"
    volumes:
-     - /var/lib/docker/vfs/dir/logcenter/updateservice-db.example.com:/data/log
-     - /var/lib/docker/vfs/dir/dbcenter/updateservice-db.example.com:/data/db
-     - /var/lib/docker/vfs/dir/datacenter/updateservice-db.example.com:/data/persist
+     - /var/lib/docker/vfs/dir/logcenter/update-db.example.com:/data/log
+     - /var/lib/docker/vfs/dir/dbcenter/update-db.example.com:/data/db
+     - /var/lib/docker/vfs/dir/datacenter/update-db.example.com:/data/persist
    links:
      - db:db
    environment:
      - EMAIL=user@example.com
-   hostname: updateservice.example.com
+   hostname: update.example.com
 ```
 
 
