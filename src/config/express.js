@@ -33,9 +33,9 @@ module.exports = function(db) {
     res.header('Access-Control-Allow-Methods','PUT,POST,GET,DELETE,OPTIONS');
 
     // intercept OPTIONS method
-    if ('OPTIONS' === req.method) {
+    if('OPTIONS' === req.method) {
       res.send(200);
-    }else {
+    }else{
       next();
     }
   });

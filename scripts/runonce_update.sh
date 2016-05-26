@@ -18,7 +18,7 @@ runonce_update() {
         # custom code after envs initialized
     else
         # custom code when restore
-        notify success "UPDATE restored."
+        notify success "Update restored."
     fi
 
     # Persist directories and files

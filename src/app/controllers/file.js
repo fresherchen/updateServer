@@ -21,7 +21,7 @@ exports.getApi = function(req,res){
   var varUrl = (req.url).split('/');
   var filename = varUrl[2];
   var path = '/data/app/app/api/'+filename;
-  console.dir(path);
+
   fs.stat(path,function(err,s){
     if(!err && s.isFile()){
       var readable = fs.createReadStream(path,'utf-8');
