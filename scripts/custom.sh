@@ -6,8 +6,6 @@ set -e
 if [[ -n "DB_PORT_27017_TCP_ADDR}" ]]; then
     sudo -u node -H sed -ri "s|mongodb://.*|mongodb://${DB_PORT_27017_TCP_ADDR}/${UPDATE_DBNAME}',|g" ${APP_DIR}/config/env/${NODE_ENV}.js
 
-    printf printf "Database installation has been completed!"
-
     if [[ -e ${APP_DIR}/config/env/local.js ]]; then
         sudo -u node -H sed -ri "s|mongodb://.*|mongodb://${DB_PORT_27017_TCP_ADDR}/${UPDATE_DBNAME}',|g" ${APP_DIR}/config/env/local.js
     fi

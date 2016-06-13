@@ -1,8 +1,8 @@
 {
   "image": "update",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "build": "{{PIPELINE_BUILD_NUMBER}}",
-  "schema": "20160422",
+  "schema": "20160613",
   "permissions": [
     {
       "chmod": "755",
@@ -60,6 +60,30 @@
       ]
     },
     {
+      "name": "BACKEND_DBMODE",
+      "default": "json-server",
+      "replacements": [
+        {
+          "pattern": "{{BACKEND_DBMODE}}",
+          "path": "${APP_DIR}/dbconf/index.js",
+          "sudo": "node",
+          "type": "1"
+        }
+      ]
+    },
+    {
+      "name": "ROUTE_JSDBNAME",
+      "default": "files",
+      "replacements": [
+        {
+          "pattern": "{{ROUTE_JSDBNAME}}",
+          "path": "${APP_DIR}/dbconf/index.js",
+          "sudo": "node",
+          "type": "1"
+        }
+      ]
+    },
+    {
       "name": "UPDATE_DBNAME",
       "default": "updateservice",
       "replacements": [
@@ -99,6 +123,7 @@
   "storages": [
     {
       "type": "1",
+      "chown": "",
       "path": "/data/app/files_update",
       "base": "update"
     }

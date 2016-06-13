@@ -1,4 +1,4 @@
-# Update Service API Reference 0.2.1
+# Update Service API Reference 0.3.0
 
 ***
 
@@ -6,11 +6,12 @@ Update Service 运行环境，适用于研发及部署。
 
 本镜像提供：
 
-* update service 0.2.1
+* update service 0.3.0
 * Node.js 4.3.0
 * Npm 3.8.7
 * Node Packages:
     - grunt
+    - json-server 0.8.14
 
 继承关系：update service -->nodejs
 
@@ -82,13 +83,3 @@ db:
      - EMAIL=user@example.com
    hostname: update.example.com
 ```
-
-
-#### Cap
-
-## Usage
-
-## Developing
-
-### Tools
-

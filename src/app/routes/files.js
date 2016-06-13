@@ -7,11 +7,18 @@ var checkToken = require('../../app/controllers/check-token'),
   fileLoad = require('../../app/controllers/file-load'),
   multipart = require('connect-multiparty'),
   multipartMiddleware = multipart(),
+  index = require('../../dbconf/index'),
   file = require('../../app/controllers/file');
 
 module.exports = function(app){
 
   app.route('/').get(file.index);
+
+  app.route('/api/:filename')
+  .get(checkToken.checkTokeninUrl,index.getApi);
+
+  app.route('/images')
+  .post(checkToken.checkForUpdate);
 
   app.route('/files')
   .get(checkToken.checkTokeninUrl,file.list)
@@ -27,12 +34,6 @@ module.exports = function(app){
 
   app.route('/files/:filename/load')
   .get(checkToken.checkTokeninUrl,fileLoad.downloadfile);
-
-  app.route('/api/:filename')
-  .get(checkToken.checkTokeninUrl,file.getApi);
-
-  app.route('/images')
-  .post(checkToken.checkForUpdate);
 
   app.param('fileId',file.fileById);
 };

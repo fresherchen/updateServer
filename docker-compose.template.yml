@@ -24,10 +24,7 @@ app:
     - ENGINE=localhost
     - ENABLE_SSHD=true
     - NODE_ENV=development
-    - UPDATE_TITLE=UpdateService
-    - UPDATE_DESC=UpdateService
     - PORT=3000
-    - UPDATE_DBNAME=updateservice
   links:
     - devdb:db
   hostname: update-dev.microservice.com

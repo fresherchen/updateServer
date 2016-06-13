@@ -116,29 +116,25 @@ exports.removefile = function(filename,callback){
 };
 
 // image_version-buildStart_version-buildEnd.sh
-exports.parseFilename = function(orgfileName,res){
+exports.parseFilename = function(orgfileName){
   if(!orgfileName){
-    res.send({message: 'File name is null!!!'});
-    return;
+    return {message: 'File name is null!!!'};
   }
   var filename = orgfileName.replace('.sh','');
   var allVar = filename.split('_');
     if(allVar.length !== 3){
-      res.send({message:'Oops, the filename format is not correct!!!'});
-      return;
+      return {message:'Oops, the filename format is not correct!!!'};
     }
   var image = allVar[0];
   var startVal = allVar[1].split('-');
     if(startVal.length !==2){
-      res.send({message:'Oops, the filename format is not correct!!!'});
-      return;
+      return {message:'Oops, the filename format is not correct!!!'};
     }
   var versionStart = startVal[0],
     buildStart = parseInt(startVal[1]);
   var endVal = allVar[2].split('-');
     if(endVal.length !==2){
-      res.send({message:'Oops, the filename format is not correct!!!'});
-      return;
+      return {message:'Oops, the filename format is not correct!!!'};
     }
   var versionEnd = endVal[0],
     buildEnd = parseInt(endVal[1]);
