@@ -7,10 +7,10 @@
 #
 FROM  edu.lxpt.cn/nodejs_ms:latest
 MAINTAINER Jpchen <jpchen@leadstec.com>
-LABEL leadstec-update-build="0.3.0-{{PIPELINE_BUILD_NUMBER}}"
+LABEL leadstec-update-build="0.3.1-{{PIPELINE_BUILD_NUMBER}}"
 
 # set environment variables
-ENV UPDATE_VERSION="0.3.0"
+ENV UPDATE_VERSION="0.3.1"
 
 # install packages
 RUN apk --update add make git nodejs && \

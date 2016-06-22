@@ -2,6 +2,12 @@
 
 ***
 
+**0.3.1**
+
+* 添加db.json文件
+* 移除ENV ROUTE_JSDBNAME
+* 修复部分bugs
+
 **0.3.0**
 
 * 添加json-server:0.8.14

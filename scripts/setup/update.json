@@ -7,7 +7,7 @@
     {
       "chmod": "755",
       "chown": "node",
-      "path": "/data/app/files_update"
+      "path": "`${APP_DIR}/files_update`"
     }
   ],
   "envs": [
@@ -17,7 +17,7 @@
       "replacements": [
         {
           "pattern": "${NODE_ENV}",
-          "path": "/data/app/config/env/development.js",
+          "path": "`${APP_DIR}/config/env/development.js`",
           "sudo": "node",
           "type": "1"
         }
@@ -29,7 +29,7 @@
       "replacements": [
         {
           "pattern": "{{UPDATE_TITLE}}",
-          "path": "/data/app/config/env/all.js",
+          "path": "`${APP_DIR}/config/env/all.js`",
           "sudo": "node",
           "type": "1"
         }
@@ -41,7 +41,7 @@
       "replacements": [
         {
           "pattern": "{{UPDATE_DESC}}",
-          "path": "/data/app/config/env/all.js",
+          "path": "`${APP_DIR}/config/env/all.js`",
           "sudo": "node",
           "type": "1"
         }
@@ -53,7 +53,7 @@
       "replacements": [
         {
           "pattern": "{{UPDATE_DBHOST}}",
-          "path": "/data/app/config/env/development.js",
+          "path": "`${APP_DIR}/config/env/${NODE_ENV}.js`",
           "sudo": "node",
           "type": "3"
         }
@@ -65,7 +65,19 @@
       "replacements": [
         {
           "pattern": "{{BACKEND_DBMODE}}",
-          "path": "${APP_DIR}/dbconf/index.js",
+          "path": "`${APP_DIR}/dbconf/index.js`",
+          "sudo": "node",
+          "type": "1"
+        }
+      ]
+    },
+    {
+      "name": "ROUTE_JSDBNAME",
+      "default": "files",
+      "replacements": [
+        {
+          "pattern": "{{ROUTE_JSDBNAME}}",
+          "path": "`${APP_DIR}/dbconf/index.js`",
           "sudo": "node",
           "type": "1"
         }
@@ -77,7 +89,7 @@
       "replacements": [
         {
           "pattern": "{{UPDATE_DBNAME}}",
-          "path": "/data/app/config/env/development.js",
+          "path": "`${APP_DIR}/config/env/${NODE_ENV}.js`",
           "sudo": "node",
           "type": "1"
         }
@@ -89,7 +101,7 @@
       "replacements": [
         {
           "pattern": "{{UPDATE_DBUSER}}",
-          "path": "/data/app/config/env/development.js",
+          "path": "`${APP_DIR}/config/env/${NODE_ENV}.js`",
           "sudo": "node",
           "type": "1"
         }
@@ -101,7 +113,7 @@
       "replacements": [
         {
           "pattern": "{{UPDATE_DBPASS}}",
-          "path": "/data/app/config/env/development.js",
+          "path": "`${APP_DIR}/config/env/${NODE_ENV}.js`",
           "sudo": "node",
           "type": "1"
         }
@@ -112,7 +124,7 @@
     {
       "type": "1",
       "chown": "",
-      "path": "/data/app/files_update",
+      "path": "`${APP_DIR}/files_update`",
       "base": "update"
     }
   ]

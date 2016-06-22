@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "This is a sample update server.\n\n1、本service是基于nodejs+mongodb+lowdb开发的，以调用API的方式对外提供Update服务；\n\n2、文档的命名格式：`image_version-buildStart_version-buildEnd.sh`；\n\n3、目前版本暂不需要通过token验证即可调用，验证部分待后续补充；\n\n4、设置filePath为虚拟属性，可以通过Schema.filePath获取。\n\nExample:update.leadstec.com/files/alpine_0.1.2-12_0.1.8-16.sh/download?hostname=update.leadstec.com\n",
-        "version": "0.3.0",
+        "version": "0.3.1",
         "title": "Update service API Reference",
         "contact": {
             "name": "jpchen@leadstec.com"
