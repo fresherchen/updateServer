@@ -25,8 +25,7 @@ exports.create = function(req,res){
     filename = file.originalFilename,
     retVal = fileLoad.parseFilename(filename);
   if(retVal.message){
-    res.json(retVal);
-    return;
+    return res.json(retVal);
   }
 
   var readyFile = new Files(retVal);
@@ -70,8 +69,7 @@ exports.list = function(req,res){
   var parseBuild = function(preBuild){
     var retBuild = preBuild.split('-');
     if(retBuild.length !== 2){
-      res.json({ message: 'Oops, bad buildStart/buildEnd format!!!' });
-      return;
+      return res.json({ message: 'Oops, bad buildStart/buildEnd format!!!' });
     }
     return retBuild[1];
   };
@@ -80,8 +78,7 @@ exports.list = function(req,res){
     if(req.query.image){
       searchCon.image = req.query.image;
     }else{
-      res.json({ message: 'Oops, bad image!!!' });
-      return;
+      return res.json({ message: 'Oops, bad image!!!' });
     }
     var buildStart = req.query.buildStart,
       buildEnd = req.query.buildEnd;
@@ -95,8 +92,7 @@ exports.list = function(req,res){
         searchCon.buildEnd_lte = buildEnd;
       }
     }else{
-      res.json({ message:'Oops, bad buildStart/buildEnd format!!!' });
-      return;
+      return res.json({ message:'Oops, bad buildStart/buildEnd format!!!' });
     }
     if(req.query.updateFile){
       searchCon.updateFile = req.query.updateFile;
@@ -137,8 +133,7 @@ exports.update = function(req,res){
     currentFilename = req.body.updateFile,
     retVal = fileLoad.parseFilename(currentFilename);
   if(retVal.message){
-    res.json(retVal);
-    return;
+    return res.json(retVal);
   }
   var readyFile  = _.extend(file, retVal);
   if(index.dbMode === 'json-server'){
@@ -164,8 +159,6 @@ exports.update = function(req,res){
         }else{
           res.json({message:'This '+readyFile.updateFile+' has existed !!!'});
         }
-      }else{
-        res.json({message:'This '+readyFile.updateFile+' has existed !!!'});
       }
     });
   }else if(index.dbMode === 'mongo'){
@@ -194,9 +187,9 @@ exports.update = function(req,res){
         var dataUpdate = JSON.parse(JSON.stringify(readyFile));
         if(dataInDb._id === dataUpdate._id){
           update();
+        }else{
+          res.json({ message: currentFilename+' is existed!!!' });
         }
-      }else{
-        res.json({ message: currentFilename+' is existed!!!' });
       }
     });
   }

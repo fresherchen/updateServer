@@ -1,8 +1,8 @@
 {
   "image": "update",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "build": "{{PIPELINE_BUILD_NUMBER}}",
-  "schema": "20160613",
+  "schema": "20160622",
   "permissions": [
     {
       "chmod": "755",
@@ -65,18 +65,6 @@
       "replacements": [
         {
           "pattern": "{{BACKEND_DBMODE}}",
-          "path": "${APP_DIR}/dbconf/index.js",
-          "sudo": "node",
-          "type": "1"
-        }
-      ]
-    },
-    {
-      "name": "ROUTE_JSDBNAME",
-      "default": "files",
-      "replacements": [
-        {
-          "pattern": "{{ROUTE_JSDBNAME}}",
           "path": "${APP_DIR}/dbconf/index.js",
           "sudo": "node",
           "type": "1"
