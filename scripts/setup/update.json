@@ -72,18 +72,6 @@
       ]
     },
     {
-      "name": "ROUTE_JSDBNAME",
-      "default": "files",
-      "replacements": [
-        {
-          "pattern": "{{ROUTE_JSDBNAME}}",
-          "path": "`${APP_DIR}/dbconf/index.js`",
-          "sudo": "node",
-          "type": "1"
-        }
-      ]
-    },
-    {
       "name": "UPDATE_DBNAME",
       "default": "updateservice",
       "replacements": [
