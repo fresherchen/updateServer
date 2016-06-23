@@ -11,11 +11,10 @@ var mongoose = require('mongoose'),
   querystring = require('querystring'),
   _ = require('lodash');
 
-
 exports.index = function(req, res) {
   res.render('index', {
     title: 'UpdateService',
-    content: 'The UpdateService server is running ~'
+    content: 'The UpdateService server is running with '+ (index.dbMode).charAt(0).toUpperCase()+ (index.dbMode).slice(1) +'~'
   });
 };
 
