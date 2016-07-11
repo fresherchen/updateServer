@@ -48,7 +48,7 @@ var FileSchema = new Schema({
 // Define a virtual filePath
 FileSchema.virtual('filePath').get(function(){
   // need parse something to gain the domain name
-  return 'update.leadstec.com/files/'+ this.updateFile +'/download?hostname='+ this.hostname;
+  return 'update.example.com/files/'+ this.updateFile +'/download?hostname='+ this.hostname;
 });
 
 mongoose.model('Files',FileSchema);
