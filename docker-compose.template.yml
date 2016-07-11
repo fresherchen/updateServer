@@ -1,5 +1,5 @@
 devdb:
-  image: reg.leadstec.com/mongo:latest
+  image: reg.example.com/mongo:latest
   ports:
     - "41437:27017"
   volumes:
@@ -7,12 +7,12 @@ devdb:
     - /var/lib/docker/vfs/dir/dbcenter/update-dev-db.microservice.com:/data/db
     - /var/lib/docker/vfs/dir/datacenter/update-dev-db.microservice.com:/data/persist
   environment:
-    - EMAIL=user@leadstec.com
+    - EMAIL=user@example.com
     - MONGOD_ENABLE_SMALLFILES=true
   hostname: update-dev-db.microservice.com
   restart: always
 app:
-  image: edu.lxpt.cn/update:latest
+  image: edu.example.cn/update:latest
   ports:
     - "41439:3000"
     - "41438:22"
@@ -20,7 +20,7 @@ app:
     - /var/lib/docker/vfs/dir/logcenter/update-dev.microservice.com:/data/log
     - /var/lib/docker/vfs/dir/datacenter/update-dev.microservice.com:/data/persist
   environment:
-    - EMAIL=user@leadstec.com
+    - EMAIL=user@example.com
     - ENGINE=localhost
     - ENABLE_SSHD=true
     - NODE_ENV=development
