@@ -1,13 +1,13 @@
 #
-# AUTHOR            Jpchen <jpchen@leadstec.com>
+# AUTHOR            Jpchen <jpchen@example.com>
 # DOCKER-VERSION    1.9.1
-# Copyright         (C) 2016 Leads Technologies Ltd. All rights reserved.
+# Copyright         (C) 2016 example Technologies Ltd. All rights reserved.
 #
 # Description       Dockerfile for Update Service image base on nodejs
 #
-FROM  edu.lxpt.cn/nodejs_ms:latest
-MAINTAINER Jpchen <jpchen@leadstec.com>
-LABEL leadstec-update-build="0.3.1-{{PIPELINE_BUILD_NUMBER}}"
+FROM  edu.example.cn/nodejs_ms:latest
+MAINTAINER Jpchen <jpchen@example.com>
+LABEL example-update-build="0.3.1-{{PIPELINE_BUILD_NUMBER}}"
 
 # set environment variables
 ENV UPDATE_VERSION="0.3.1"
