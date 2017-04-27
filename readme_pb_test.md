@@ -1,14 +1,14 @@
 # Points and badges test cases readme
 
-tips: suggestion: use newman cli to run those test cases, remember to add localhost.newman_environment, '--delay-request' params and the delay time(10000).
+tips: use newman cli to run those test cases, remember to add localhost.newman_environment, '--delay-request' params and the delay time(10000).
 
 ## test cases 1 "exercise":
 
 ```
 
-0 clear data.
+clear data.
 
-post /resetData
+post 0 /resetData
 
 	input : {
 	    type: exercise
@@ -37,7 +37,7 @@ get 1 /exercises
 	}
 
 1...7
-put /exercises
+put x /exercises
 
 	input :{
 	    increment_exercise_ids: [exercise.id]
@@ -130,7 +130,7 @@ get 1st /badges:
 	}
 
 8...14
-put /exercises
+put x /exercises
 
 get 2nd /badges
 
@@ -155,7 +155,7 @@ get 2nd /badges
 	}
 
 15...21
-put /exercises
+put x /exercises
 
 get 3rd /badges
 
@@ -180,7 +180,7 @@ get 3rd /badges
 	}
 
 22...30
-put /exercises
+put x /exercises
 
 get 4th /badges
 
@@ -205,7 +205,7 @@ get 4th /badges
 	}
 
 30...60
-put /exercises
+put x /exercises
 
 get 5th /badges
 
@@ -228,8 +228,8 @@ get 5th /badges
 	    tests["'Exercise Olympian' badge is earned"] = level5 === 'Earned';
 	}
 
-61 clear data.
-post /resetData
+clear data.
+post 61 /resetData
 
 	input: {
 	    type: exercise,
@@ -251,9 +251,9 @@ post /resetData
 
 ```
 
-0 clear data;
+clear data;
 
-post /resetData
+post 0 /resetData
 
 	input : {
 	    type: read
@@ -268,7 +268,7 @@ post /resetData
 	    tests[\"responseBody is 'Okey, resetData successfully!'\"] = responseBody.has(\"Okey, resetData successfully!\"); 
 	}
 
-test get 1 /user
+get 1 /user
 
 	input : {}
 	output: {
@@ -281,7 +281,7 @@ test get 1 /user
 	    tests[\"responseBody.patientGuide is not undefined\"] = jsonData.patientGuide !== undefined; 
 	}
 
-test get 2 /guide
+get 2 /guide
 
 	input : {}
 	output: {
@@ -294,8 +294,8 @@ test get 2 /guide
 	    tests[\"subItemsIncludedInProgressCount = 33\"] = ids2.length === 33;
 	}
 
-1
-put /patientGuideProgress
+
+put 1 /patientGuideProgress
 
 	input :{
 		patientGuideProgress: {completedSubItems: completedSubItems,
@@ -357,7 +357,7 @@ get /points
 	}
 
 2...33
-put /patientGuideProgress
+put x /patientGuideProgress
 
 	input :{
 		patientGuideProgress: {completedSubItems: completedSubItems,
@@ -383,8 +383,7 @@ put /patientGuideProgress
 	    tests["responseBody.subItemsIncludedInProgressCompletedCount is index"] = jsonData.returnRes.subItemsIncludedInProgressCompletedCount === index;
 	}
 
-get 2nd points
-get /points
+get 2nd /points
 
 	input :{}
 	output:{
@@ -420,8 +419,7 @@ get /points
 	    tests["Read Guide Section points is 106"] = readPoints === 106;
 	}
 
-get 3rd badges
-get /badges
+get 3rd /badges
 
 	input :{}
 	output:[
@@ -457,8 +455,8 @@ get /badges
 	    tests["Patient Guide Graduate is earned"] = level === 'Earned';
 	}
 
-0 clear data
-post /resetData
+clear data
+post 0 /resetData
 
 	input : {
 	    type: read,
@@ -479,9 +477,9 @@ post /resetData
 ## test cases 3 "send":
 
 ```
-0 clear data;
+clear data;
 
-post /resetData
+post 0 /resetData
 
 	input : {
 	    type: send
@@ -496,8 +494,8 @@ post /resetData
 	    tests[\"responseBody is 'Okey, resetData successfully!'\"] = responseBody.has(\"Okey, resetData successfully!\");
 	}
 
-1 
-post /messages
+
+post 1 /messages
 
 	input :{
 	    text: 'Are you ok?'
@@ -511,8 +509,7 @@ post /messages
 	    tests["Status code is 200 "] = responseCode.code === 200;
 	}
 
-get 1th points
-get /points
+get 1th /points
 
 	input :{}
 	output:{
@@ -548,8 +545,8 @@ get /points
 	    tests["Send Message Points is 10"] = readPoints === 10;
 	}
 
-2 clear data
-post /resetData
+clear data
+post 2 /resetData
 
 	input : {
 	    type: send,
@@ -571,9 +568,9 @@ post /resetData
 ## test cases 4 "checkIn":
 
 ```
-0 clear data;
+clear data;
 
-post /resetData
+post 0 /resetData
 
 	input : {
 	    type: checkIn
@@ -588,9 +585,7 @@ post /resetData
 	    tests[\"responseBody is 'Okey, resetData successfully!'\"] = responseBody.has(\"Okey, resetData successfully!\");
 	}
 
-get 0 endUser
-
-get /user
+get 0 /user
 
 	input : {}
 	output: {
@@ -606,9 +601,7 @@ get /user
 	    postman.setEnvironmentVariable("journeyId", journeyId);
 	}
 
-get 0 TaskDefinitions
-
-get /TaskDefinitions?filter[where][name]=Pre-op Check-In
+get 0 /TaskDefinitions?filter[where][name]=Pre-op Check-In
 
 	input : {
 	    name: Pre-op Check-In
@@ -626,9 +619,7 @@ get /TaskDefinitions?filter[where][name]=Pre-op Check-In
 	    postman.setEnvironmentVariable("journeyPathTaskId", journeyPathTaskId);
 	}
 
-get 0 JourneyPathTasks
-
-get /JourneyPathTasks?filter[where][journeyId]={{journeyId}}&filter[where][taskDefinitionId]={{taskDefinitionId}}
+get 0 /JourneyPathTasks?filter[where][journeyId]={{journeyId}}&filter[where][taskDefinitionId]={{taskDefinitionId}}
 
 	input : {
 	    journeyId: journeyId
@@ -647,9 +638,7 @@ get /JourneyPathTasks?filter[where][journeyId]={{journeyId}}&filter[where][taskD
 	    postman.setEnvironmentVariable("journeyPathTaskId", journeyPathTaskId);
 	}
 
-post 1 /createTask
-
-post /Tasks
+post 1 /Tasks
 
 	input : {
 	    {journeyId: journeyId,
@@ -674,9 +663,7 @@ post /Tasks
 	    postman.setEnvironmentVariable("taskId1", id);
 	}
 
-get 1 /survey
-
-get /{{taskId1}}/survey
+get 1 /{{taskId1}}/survey
 
 	input : {}
 	output: {
@@ -701,9 +688,7 @@ get /{{taskId1}}/survey
 	    tests["responseBody.questionnaires.length > 0"] = jsonData.questionnaires.length > 0;
 	}
 
-post 1 /survey
-
-post /{{taskId1}}/survey
+post 1 /{{taskId1}}/survey
 
 	input : {
 	    {"answers": [{"id":questionId1,"value":4},
@@ -716,9 +701,7 @@ post /{{taskId1}}/survey
 	    tests["Status code is 200"] = responseCode.code === 200;
 	}
 
-get 1 /journeyMetric
-
-get /JourneyMetrics?filter[where][taskId]={{taskId1}}
+get 1 /JourneyMetrics?filter[where][taskId]={{taskId1}}
 
 	input : {
 		taskId: taskId
@@ -738,9 +721,7 @@ get /JourneyMetrics?filter[where][taskId]={{taskId1}}
 	    postman.setEnvironmentVariable(\"journeyMetric2\", journeyMetric2);
 	}
 
-delete 1st /journeyMetric
-
-delete /JourneyMetrics/{{journeyMetric1}}
+delete 1st /JourneyMetrics/{{journeyMetric1}}
 
 	input : {}
 	output: {
@@ -751,9 +732,7 @@ delete /JourneyMetrics/{{journeyMetric1}}
 	    tests[\"Status code is 200\"] = responseCode.code === 200;
 	}
 
-delete 2nd /journeyMetric
-
-delete /JourneyMetrics/{{journeyMetric2}}
+delete 2nd /JourneyMetrics/{{journeyMetric2}}
 
 	input : {}
 	output: {
@@ -763,9 +742,7 @@ delete /JourneyMetrics/{{journeyMetric2}}
 	    tests[\"Status code is 200\"] = responseCode.code === 200;
 	}
 
-delete 1 /tasks
-
-delete /tasks/{{taskId1}}
+delete 1 /tasks/{{taskId1}}
 
 	input : {}
 	output: {
@@ -778,7 +755,7 @@ delete /tasks/{{taskId1}}
 2...10
 post /createTask, get /survey, post /survey, get /journeyMetric, delete /journeyMetric1, ..., delete /tasks
 
-get 3rd badge /badges
+get 3rd /badges
 
 	input : {}
 	output: {
@@ -807,7 +784,7 @@ get 3rd badge /badges
 	    tests[\"'Check-in Dedicated badge' is earned\"] = level1 === 'Earned';
 	}
 
-get 4th points /points
+get 4th /points
 
 post 11 /resetData
 
@@ -854,7 +831,7 @@ get 1 /user
 	    tests["Login successful, user is not undefined!"] = userId !== undefined;
 	}
 
-get 1th points /points
+get 1th /points
 
 	input :{}
 	output:{
@@ -890,7 +867,7 @@ get 1th points /points
 	    tests["Login Points is 19"] = readPoints === 19;
 	}
 
-get 2th badge /badges
+get 2th /badges
 
 	input :{}
 	output:[
@@ -929,7 +906,7 @@ get 2th badge /badges
 8...30
 get /user ...
 
-get 3rd points /points
+get 3rd /points
 
 	input: {}
 	output:{
@@ -965,7 +942,7 @@ get 3rd points /points
 	    tests["Login Points is 134"] = readPoints === 134;
 	}
 
-get 4rd badges /badges
+get 4rd /badges
 
 	input: {}
 	output:[
