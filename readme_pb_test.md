@@ -295,10 +295,10 @@ put 1 /patientGuideProgress
 
     input :{
         patientGuideProgress: {completedSubItems: completedSubItems,
-                        subItemsExcludedFromProgress: subItemsExcludedFromProgress,
-                        subItemsIncludedInProgressCompletedCount: subItemsIncludedInProgressCompletedCount,
-                        subItemsIncludedInProgressCount: subItemsIncludedInProgressCount
-                    }
+            subItemsExcludedFromProgress: subItemsExcludedFromProgress,
+            subItemsIncludedInProgressCompletedCount: subItemsIncludedInProgressCompletedCount,
+            subItemsIncludedInProgressCount: subItemsIncludedInProgressCount
+        }
     }
     output:{
       "returnRes": {
@@ -357,10 +357,10 @@ put x /patientGuideProgress
 
     input :{
         patientGuideProgress: {completedSubItems: completedSubItems,
-                        subItemsExcludedFromProgress: subItemsExcludedFromProgress,
-                        subItemsIncludedInProgressCompletedCount: subItemsIncludedInProgressCompletedCount,
-                        subItemsIncludedInProgressCount: subItemsIncludedInProgressCount
-                    }
+            subItemsExcludedFromProgress: subItemsExcludedFromProgress,
+            subItemsIncludedInProgressCompletedCount: subItemsIncludedInProgressCompletedCount,
+            subItemsIncludedInProgressCount: subItemsIncludedInProgressCount
+        }
     }
     output:{
       "returnRes": {
