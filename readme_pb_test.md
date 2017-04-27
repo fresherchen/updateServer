@@ -2,7 +2,7 @@
 
 tips: suggestion: use newman cli to run those test cases, remember to add localhost.newman_environment, '--delay-request' params and the delay time(10000).
 
-## test case 1 "exercise":
+## test cases 1 "exercise":
 
 ```
 
@@ -247,7 +247,7 @@ post /resetData
 
 ```
 
-## test case 2 "read":
+## test cases 2 "read":
 
 ```
 
@@ -476,7 +476,7 @@ post /resetData
 
 ```
 
-## test case 3 "send":
+## test cases 3 "send":
 
 ```
 0 clear data;
@@ -568,7 +568,7 @@ post /resetData
 
 ```
 
-## test case 4 "checkIn":
+## test cases 4 "checkIn":
 
 ```
 0 clear data;
@@ -814,7 +814,7 @@ post 11 /resetData
 
 ```
 
-## test case 5 "login":
+## test cases 5 "login":
 
 ```
 0 clear data;
@@ -1024,10 +1024,10 @@ post /resetData
 
 
 
-## test case 4 "assessment":
+## test cases 6 "assessment":
 
 same to checkIn
 
-## test case 5 "feedback":
+## test cases 7 "feedback":
 
 same to checkIn
