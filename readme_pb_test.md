@@ -5,8 +5,7 @@ Tips: Use newman cli to run those test cases, remember to add localhost.newman_e
 ## Test cases 1 "exercise":
 
 ```
-clear data.
-
+clear data
 post 0 /resetData
 
 	input : {
@@ -226,7 +225,7 @@ get 5th /badges
 	    tests["'Exercise Olympian' badge is earned"] = level5 === 'Earned';
 	}
 
-clear data.
+clear data
 post 61 /resetData
 
 	input: {
@@ -248,8 +247,7 @@ post 61 /resetData
 ## Test cases 2 "read":
 
 ```
-clear data;
-
+clear data
 post 0 /resetData
 
 	input : {
@@ -474,8 +472,7 @@ post 0 /resetData
 ## Test cases 3 "send":
 
 ```
-clear data;
-
+clear data
 post 0 /resetData
 
 	input : {
@@ -565,8 +562,7 @@ post 2 /resetData
 ## Test cases 4 "checkIn":
 
 ```
-clear data;
-
+clear data
 post 0 /resetData
 
 	input : {
@@ -791,9 +787,8 @@ post 11 /resetData
 ## Test cases 5 "login":
 
 ```
-0 clear data;
-
-post /resetData
+clear data
+post 0 /resetData
 
 	input : {
 	    type: login
@@ -975,9 +970,8 @@ get 4rd /badges
 	    tests["Login Devoted badge is earned"] = level === 'Earned';
 	}
 
-0 clear data;
-
-post /resetData
+clear data
+post 0 /resetData
 
 	input: {
 	    type: login,
