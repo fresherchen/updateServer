@@ -22,6 +22,7 @@ testcase:{
     tests["Status code is 200 "] = responseCode.code === 200;
     tests[\"responseBody is 'Okey, resetData successfully!'\"] = responseBody.has(\"Okey, resetData successfully!\"); 
 }
+
 get 1 /exercises
 
 input : {}
@@ -53,10 +54,7 @@ testcase:{
 
 get 1st /badges:
  
-input:
-{
-
-}
+input:{}
 output:
 [
   {
@@ -68,30 +66,6 @@ output:
         "badge_image_url": "https://assets-cdn.clarifyhealth.com/CHS_Badge_Mover&Shaker.png",
         "level": "Earned",
         "type": "streakBadge"
-      },
-      {
-        "badgeTitle": "Exercise Amateur Athlete",
-        "date": "Jul 17th",
-        "badgeDescription": "Earn badges for recording your exercises consistently",
-        "badge_image_url": "https://assets-cdn.clarifyhealth.com/CHS_Badge_Limber.png",
-        "level": "Earned",
-        "type": "streakBadge"
-      },
-      {
-        "badgeTitle": "Exercise Professional Athlete",
-        "date": "Jul 31st",
-        "badgeDescription": "Earn badges for recording your exercises consistently",
-        "badge_image_url": "https://assets-cdn.clarifyhealth.com/CHS_Badge_Athletic.png",
-        "level": "Earned",
-        "type": "streakBadge"
-      },
-      {
-        "badgeTitle": "Exercise Fit",
-        "date": "Aug 18th",
-        "badgeDescription": "Earn badges for recording your exercises consistently",
-        "badge_image_url": "https://assets-cdn.clarifyhealth.com/CHS_Badge_Fit.png",
-        "level": "Earned",
-        "type": "instanceBadge"
       }
     ],
     "level": "Badges"
@@ -119,14 +93,6 @@ output:
         "date": "",
         "badgeDescription": "Earn badges for recording your exercises consistently",
         "badge_image_url": "https://assets-cdn.clarifyhealth.com/CHS_Badge_Fit.png",
-        "level": "Unearned",
-        "type": "instanceBadge"
-      },
-      {
-        "badgeTitle": "Exercise Olympian",
-        "date": "",
-        "badgeDescription": "Earn badges for recording your exercises consistently",
-        "badge_image_url": "https://assets-cdn.clarifyhealth.com/CHS_Badge_Olympian.png",
         "level": "Unearned",
         "type": "instanceBadge"
       },
@@ -328,8 +294,11 @@ testcase:{
 put /patientGuideProgress
 
 input :{
-    type: read,
-    index: 1
+	patientGuideProgress: {completedSubItems: completedSubItems,
+					subItemsExcludedFromProgress: subItemsExcludedFromProgress,
+					subItemsIncludedInProgressCompletedCount: subItemsIncludedInProgressCompletedCount,
+					subItemsIncludedInProgressCount: subItemsIncludedInProgressCount
+				}
 }
 output:{
   "returnRes": {
@@ -387,8 +356,11 @@ testcase:{
 put /patientGuideProgress
 
 input :{
-    type: read,
-    index: index
+	patientGuideProgress: {completedSubItems: completedSubItems,
+					subItemsExcludedFromProgress: subItemsExcludedFromProgress,
+					subItemsIncludedInProgressCompletedCount: subItemsIncludedInProgressCompletedCount,
+					subItemsIncludedInProgressCount: subItemsIncludedInProgressCount
+				}
 }
 output:{
   "returnRes": {
@@ -407,7 +379,7 @@ testcase:{
     tests["responseBody.subItemsIncludedInProgressCompletedCount is index"] = jsonData.returnRes.subItemsIncludedInProgressCompletedCount === index;
 }
 
-get 2th points
+get 2nd points
 get /points
 
 input :{}
@@ -444,7 +416,7 @@ testcase:{
     tests["Read Guide Section points is 106"] = readPoints === 106;
 }
 
-get 3th badges
+get 3rd badges
 get /badges
 
 input :{}
@@ -615,11 +587,9 @@ testcase:{
 get 0 endUser
 
 get http://localhost:3030/api/CarePilot/user
-input : {
-    type: checkIn
-}
+input : {}
 output: {
-  get endUser, including questions
+  get endUser, including journeyId
 }
 testcase:{
     tests["Status code is 200"] = responseCode.code === 200;
@@ -650,7 +620,6 @@ testcase:{
     postman.setEnvironmentVariable("journeyPathTaskId", journeyPathTaskId);
 }
 
-
 get 0 JourneyPathTasks
 
 get http://localhost:3030/api/JourneyPathTasks?filter[where][journeyId]={{journeyId}}&filter[where][taskDefinitionId]={{taskDefinitionId}}
@@ -680,15 +649,11 @@ input : {
     {journeyId: journeyId,
     journeyPathTaskId: journeyPathTaskId,
     taskDefinitionId: taskDefinitionId,
-    startDate: "2017-04-10T01:56:36.136Z",
-    endDate: "2017-04-16T01:56:36.136Z",
-    dueDate: "2017-04-15T01:56:36.136Z",
+    startDate: startDate,
+    endDate: endDate,
+    dueDate: dueDate,
     status: "Active",
-    details:{"items":[{"id":"57987cb8-2298-4643-ad27-3cbc42cabe47","response":null,"responseTime":null},
-    {"id":"2e49d5cd-b3f5-432b-8f7a-5aa23b4d8519","response":null,"responseTime":null},
-    {"id":"18344ba5-cea5-4c42-b8d3-6efebf9361e4","response":null,"responseTime":null},
-    {"id":"4b17c562-a69d-4db9-a6ca-87cb3e10b6b1","response":null,"responseTime":null},
-    {"id":"d7afbda8-7b57-4910-93b8-84a3af2db22a","response":null,"responseTime":null}],"seen":true}}
+    details: details}
 }
 output: {
   create Tasks
@@ -703,14 +668,13 @@ testcase:{
     postman.setEnvironmentVariable("taskId1", id);
 }
 
-
 get 1 /survey
 
 get http://localhost:3030/api/CarePilot/{{taskId1}}/survey
 
 input : {}
 output: {
-   get survey Tasks
+   get survey Tasks, including questions
 }
 testcase:{
     var jsonData = JSON.parse(responseBody);
@@ -731,7 +695,6 @@ testcase:{
     tests["responseBody.questionnaires.length > 0"] = jsonData.questionnaires.length > 0;
 }
 
-
 post 1 /survey
 
 post http://localhost:3030/api/CarePilot/{{taskId1}}/survey
@@ -751,7 +714,9 @@ get 1 /journeyMetric
 
 get http://localhost:3030/api/JourneyMetrics?filter[where][taskId]={{taskId1}}
 
-input : {}
+input : {
+	taskId: taskId
+}
 output: {
    journeyMetric create by updating Tasks
 }
@@ -804,8 +769,8 @@ testcase:{
     tests[\"Status code is 200\"] = responseCode.code === 200;
 }
 
-
 2...10
+post /createTask, get /survey, post /survey, get /journeyMetric, delete /journeyMetric1, ..., delete /tasks
 
 get 3rd badge /badges
 
@@ -837,8 +802,6 @@ testcase:{
 }
 
 get 4th points /points
-
-get 5th badges /badges
 
 post 11 /resetData
 
@@ -958,8 +921,7 @@ testcase:{
 }
 
 8...30
-
-get ... /user
+get /user ...
 
 get 3rd points /points
 input: {}
