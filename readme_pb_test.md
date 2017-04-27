@@ -1,8 +1,8 @@
-# Points and badges test cases readme
+# Test cases readme of points and badges
 
 Tips: Use newman cli to run those test cases, remember to add localhost.newman_environment, '--delay-request' params and the delay time(10000).
 
-## Test cases 1 "exercise":
+## Test cases 1 ---"exercise":
 
 ```
 clear data
@@ -245,7 +245,7 @@ post 61 /resetData
 
 ```
 
-## Test cases 2 "read":
+## Test cases 2 ---"read":
 
 ```
 clear data
@@ -470,7 +470,7 @@ post 0 /resetData
 
 ```
 
-## Test cases 3 "send":
+## Test cases 3 ---"send":
 
 ```
 clear data
@@ -560,7 +560,7 @@ post 2 /resetData
 
 ```
 
-## Test cases 4 "checkIn":
+## Test cases 4 ---"checkIn":
 
 ```
 clear data
@@ -786,7 +786,7 @@ post 11 /resetData
 
 ```
 
-## Test cases 5 "login":
+## Test cases 5 ---"login":
 
 ```
 clear data
@@ -991,10 +991,10 @@ post 0 /resetData
 
 ```
 
-## Test cases 6 "assessment":
+## Test cases 6 ---"assessment":
 
 Same to "checkIn"
 
-## Test cases 7 "feedback":
+## Test cases 7 ---"feedback":
 
 Same to "checkIn"
