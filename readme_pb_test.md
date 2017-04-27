@@ -134,7 +134,7 @@ get /badges
 update 8...14 exercises
 put /exercises
 
-same as 'update 1...7 exercises'
+    same as 'update 1...7 exercises'
 
 get 2nd badges
 get /badges
@@ -166,7 +166,7 @@ get /badges
 update 15...21 exercises
 put /exercises
 
-same as 'update 1...7 exercises'
+    same as 'update 1...7 exercises'
 
 get 3rd badges
 get /badges
@@ -198,7 +198,7 @@ get /badges
 update 22...30 exercises
 put /exercises
 
-same as 'update 1...7 exercises'
+    same as 'update 1...7 exercises'
 
 get 4th badges
 get /badges
@@ -230,7 +230,7 @@ get /badges
 update 30...60 exercises
 put /exercises
 
-same as 'update 1...7 exercises '
+    same as 'update 1...7 exercises '
 
 get 5th badges
 get /badges
@@ -281,8 +281,8 @@ post /resetData
 ## Test cases 2 ---"read":
 
 ```
-clear data
-post 0 /resetData
+clear 0 data
+post /resetData
 
     input : {
         type: read
@@ -349,7 +349,7 @@ put /patientGuideProgress
     testcase:{
         tests["Status code is 200 "] = responseCode.code === 200;
         var jsonData = JSON.parse(responseBody);
-        tests["responseBody.subItemsIncludedInProgressCompletedCount is 1"] = jsonData.returnRes.subItemsIncludedInProgressCompletedCount === 1;
+        tests["responseBody.subItemsIncludedInProgressCompletedCount is subItemsIncludedInProgressCompletedCount"] = jsonData.returnRes.subItemsIncludedInProgressCompletedCount === subItemsIncludedInProgressCompletedCount;
     }
 
 get 1st points 
@@ -393,25 +393,7 @@ get /points
 update 2...33 patientGuideProgress
 put /patientGuideProgress
 
-    input :{
-        patientGuideProgress: { completedSubItems: completedSubItems,
-            subItemsExcludedFromProgress: subItemsExcludedFromProgress,
-            subItemsIncludedInProgressCompletedCount: subItemsIncludedInProgressCompletedCount,
-            subItemsIncludedInProgressCount: subItemsIncludedInProgressCount
-        }
-    }
-    output:{
-      "returnRes": {
-        "completedSubItems": completedSubItems,
-        "subItemsIncludedInProgressCompletedCount": subItemsIncludedInProgressCompletedCount,
-        "subItemsIncludedInProgressCount": subItemsIncludedInProgressCount
-      }
-    }
-    testcase:{
-        tests["Status code is 200 "] = responseCode.code === 200;
-        var jsonData = JSON.parse(responseBody);
-        tests["responseBody.subItemsIncludedInProgressCompletedCount is index"] = jsonData.returnRes.subItemsIncludedInProgressCompletedCount === index;
-    }
+    same as 'update 1 patientGuideProgress'
 
 get 2nd points
 get /points
@@ -787,7 +769,10 @@ delete /tasks/{{taskId1}}
         tests["Status code is 200"] = responseCode.code === 200;
     }
 
-2...5
+create 2...5 task and delete the task
+
+    same as 'create 1 task'...
+
 create task
 post /Tasks,
 
@@ -833,7 +818,10 @@ get /badges
         tests["'Check-in Dedicated badge' is earned"] = level1 === 'Earned';
     }
 
-6...10
+create 6...10 task and delete task
+
+    same as 'create 1 task'...
+
 create task
 post /Tasks,
 
@@ -1036,7 +1024,7 @@ get /badges
 get 8...30 user
 get /user
 
-same as 'get 1...7 user'
+    same as 'get 1...7 user'
 
 get 3rd points
 get /points
@@ -1320,7 +1308,10 @@ delete /tasks/{{taskId1}}
         tests["Status code is 200"] = responseCode.code === 200;
     }
 
-2...4
+create 2...4 task and delete the task
+
+    same as 'create 1 task'...
+
 create task
 post /Tasks,
 
@@ -1377,7 +1368,10 @@ get /points
         tests[\"Assessment points is 435\"] = readPoints === 435;
     }
 
-5
+create 5 task and delete the task
+
+    same as 'create 1 task'...
+
 create task
 post /Tasks,
 
@@ -1631,7 +1625,10 @@ delete /tasks/{{taskId1}}
         tests["Status code is 200"] = responseCode.code === 200;
     }
 
-2...4
+create 2...4 task and delete the task
+
+    same as 'create 1 task'...
+
 create task
 post /Tasks,
 
@@ -1688,7 +1685,11 @@ get /points
         tests[\"Feedback points is 235\"] = readPoints === 235;
     }
 
-5
+
+create 5 task and delete the task
+
+    same as 'create 1 task'...
+
 create task
 post /Tasks,
 
