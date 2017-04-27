@@ -804,7 +804,7 @@ post 0 /resetData
 	}
 
 1...7
-get 1 /user
+get x /user
 
 	input : {}
 	output: {
@@ -896,7 +896,7 @@ get 2th /badges
 	}
 
 8...30
-get /user ...
+get x /user ...
 
 get 3rd /points
 
@@ -991,8 +991,8 @@ post 0 /resetData
 
 ## Test cases 6 "assessment":
 
-Same to checkIn
+Same to "checkIn"
 
 ## Test cases 7 "feedback":
 
-Same to checkIn
+Same to "checkIn"
