@@ -5,7 +5,6 @@ Tips: Use newman cli to run those test cases, remember to add localhost.newman_e
 ## Test cases 1 "exercise":
 
 ```
-
 clear data.
 
 post 0 /resetData
@@ -108,7 +107,6 @@ get 1st /badges:
 	    "level": "Unearned Badges"
 	  }
 	]
-
 	testcase: {
 	    var jsonData = JSON.parse(responseBody);
 	    tests["Status code is 200"] = responseCode.code === 200;
@@ -250,7 +248,6 @@ post 61 /resetData
 ## Test cases 2 "read":
 
 ```
-
 clear data;
 
 post 0 /resetData
@@ -978,7 +975,6 @@ get 4rd /badges
 	    tests["Login Devoted badge is earned"] = level === 'Earned';
 	}
 
-
 0 clear data;
 
 post /resetData
@@ -998,8 +994,6 @@ post /resetData
 	}
 
 ```
-
-
 
 ## Test cases 6 "assessment":
 
