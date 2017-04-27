@@ -18,7 +18,7 @@ post 0 /resetData
 	}
 	testcase:{
 	    tests["Status code is 200 "] = responseCode.code === 200;
-	    tests[\"responseBody is 'Okey, resetData successfully!'\"] = responseBody.has(\"Okey, resetData successfully!\"); 
+	    tests["responseBody is 'Okey, resetData successfully!'"] = responseBody.has("Okey, resetData successfully!"); 
 	}
 
 get 1 /exercises
@@ -31,7 +31,7 @@ get 1 /exercises
 	}
 	testcase:{
 	    tests["Status code is 200 "] = responseCode.code === 200;
-	    tests[\"responseBody.recommended.exercises.length > 0\"] = jsonData.recommended.exercises.length > 0;
+	    tests["responseBody.recommended.exercises.length > 0"] = jsonData.recommended.exercises.length > 0;
 	}
 
 1...7
@@ -47,7 +47,7 @@ put x /exercises
 	}
 	testcase:{
 	    tests["Status code is 200 "] = responseCode.code === 200;
-	    tests[\"responseBody is 'You're doing great, keep it up!'\"] = responseBody.has(\"You're doing great, keep it up!\"); 
+	    tests["responseBody is 'You're doing great, keep it up!'"] = responseBody.has("You're doing great, keep it up!"); 
 	}
 
 get 1st /badges:
@@ -209,7 +209,8 @@ get 5th /badges
 	testcase: {
 	    var jsonData = JSON.parse(responseBody);
 	    tests["Status code is 200"] = responseCode.code === 200;
-	    var level5;\nif (jsonData && jsonData.length) {
+	    var level5;
+	    if (jsonData && jsonData.length) {
 	        for (var i in jsonData) {
 	            if (jsonData[i].level === 'Badges' && jsonData[i].badges && jsonData[i].badges.length) {
 	                for (var j in jsonData[i].badges) {
@@ -260,7 +261,7 @@ post 0 /resetData
 	}
 	testcase:{
 	    tests["Status code is 200 "] = responseCode.code === 200;
-	    tests[\"responseBody is 'Okey, resetData successfully!'\"] = responseBody.has(\"Okey, resetData successfully!\"); 
+	    tests["responseBody is 'Okey, resetData successfully!'"] = responseBody.has("Okey, resetData successfully!"); 
 	}
 
 get 1 /user
@@ -273,7 +274,7 @@ get 1 /user
 	}
 	testcase:{
 	    tests["Status code is 200 "] = responseCode.code === 200;
-	    tests[\"responseBody.patientGuide is not undefined\"] = jsonData.patientGuide !== undefined; 
+	    tests["responseBody.patientGuide is not undefined"] = jsonData.patientGuide !== undefined; 
 	}
 
 get 2 /guide
@@ -286,7 +287,7 @@ get 2 /guide
 	}
 	testcase:{
 	    tests["Status code is 200 "] = responseCode.code === 200;
-	    tests[\"subItemsIncludedInProgressCount = 33\"] = ids2.length === 33;
+	    tests["subItemsIncludedInProgressCount = 33"] = ids2.length === 33;
 	}
 
 
@@ -464,7 +465,7 @@ post 0 /resetData
 	}
 	testcase:{
 	    tests["Status code is 200 "] = responseCode.code === 200;
-	    tests[\"responseBody is 'Okey, resetData successfully!'\"] = responseBody.has(\"Okey, resetData successfully!\"); 
+	    tests["responseBody is 'Okey, resetData successfully!'"] = responseBody.has("Okey, resetData successfully!"); 
 	}
 
 ```
@@ -485,7 +486,7 @@ post 0 /resetData
 	}
 	testcase:{
 	    tests["Status code is 200 "] = responseCode.code === 200;
-	    tests[\"responseBody is 'Okey, resetData successfully!'\"] = responseBody.has(\"Okey, resetData successfully!\");
+	    tests["responseBody is 'Okey, resetData successfully!'"] = responseBody.has("Okey, resetData successfully!");
 	}
 
 
@@ -554,7 +555,7 @@ post 2 /resetData
 	}
 	testcase:{
 	    tests["Status code is 200 "] = responseCode.code === 200;
-	    tests[\"responseBody is 'Okey, resetData successfully!'\"] = responseBody.has(\"Okey, resetData successfully!\"); 
+	    tests["responseBody is 'Okey, resetData successfully!'"] = responseBody.has("Okey, resetData successfully!"); 
 	}
 
 ```
@@ -575,7 +576,7 @@ post 0 /resetData
 	}
 	testcase:{
 	    tests["Status code is 200 "] = responseCode.code === 200;
-	    tests[\"responseBody is 'Okey, resetData successfully!'\"] = responseBody.has(\"Okey, resetData successfully!\");
+	    tests["responseBody is 'Okey, resetData successfully!'"] = responseBody.has("Okey, resetData successfully!");
 	}
 
 get 0 /user
@@ -704,14 +705,14 @@ get 1 /JourneyMetrics?filter[where][taskId]={{taskId1}}
 	}
 	testcase:{
 	    var jsonData = JSON.parse(responseBody);
-	    tests[\"Status code is 200\"] = responseCode.code === 200;
+	    tests["Status code is 200"] = responseCode.code === 200;
 	    var journeyMetric1, journeyMetric2;
 	    if (jsonData && jsonData.length && jsonData.length ===2) {
 	        journeyMetric1 = jsonData[0].id;
 	            journeyMetric2 = jsonData[1].id;
 	    }
-	    postman.setEnvironmentVariable(\"journeyMetric1\", journeyMetric1);
-	    postman.setEnvironmentVariable(\"journeyMetric2\", journeyMetric2);
+	    postman.setEnvironmentVariable("journeyMetric1", journeyMetric1);
+	    postman.setEnvironmentVariable("journeyMetric2", journeyMetric2);
 	}
 
 delete 1st /JourneyMetrics/{{journeyMetric1}}
@@ -722,7 +723,7 @@ delete 1st /JourneyMetrics/{{journeyMetric1}}
 	}
 	testcase:{
 	    var jsonData = JSON.parse(responseBody);
-	    tests[\"Status code is 200\"] = responseCode.code === 200;
+	    tests["Status code is 200"] = responseCode.code === 200;
 	}
 
 delete 2nd /JourneyMetrics/{{journeyMetric2}}
@@ -732,7 +733,7 @@ delete 2nd /JourneyMetrics/{{journeyMetric2}}
 	   journeyMetric create by updating Tasks
 	}
 	testcase:{
-	    tests[\"Status code is 200\"] = responseCode.code === 200;
+	    tests["Status code is 200"] = responseCode.code === 200;
 	}
 
 delete 1 /tasks/{{taskId1}}
@@ -742,7 +743,7 @@ delete 1 /tasks/{{taskId1}}
 	   journeyMetric create by updating Tasks
 	}
 	testcase:{
-	    tests[\"Status code is 200\"] = responseCode.code === 200;
+	    tests["Status code is 200"] = responseCode.code === 200;
 	}
 
 2...10
@@ -760,8 +761,9 @@ get 3rd /badges
 	}
 	testcase:{
 	    var jsonData = JSON.parse(responseBody);
-	    tests[\"Status code is 200\"] = responseCode.code === 200;
-	    var level1;\nif (jsonData && jsonData.length) {
+	    tests["Status code is 200"] = responseCode.code === 200;
+	    var level1;
+	    if (jsonData && jsonData.length) {
 	        for (var i in jsonData) {
 	            if (jsonData[i].level === 'Badges' && jsonData[i].badges && jsonData[i].badges.length) {
 	                for (var j in jsonData[i].badges) {
@@ -774,7 +776,7 @@ get 3rd /badges
 	            }
 	        }
 	    }
-	    tests[\"'Check-in Dedicated badge' is earned\"] = level1 === 'Earned';
+	    tests["'Check-in Dedicated badge' is earned"] = level1 === 'Earned';
 	}
 
 get 4th /points
@@ -800,7 +802,7 @@ post 0 /resetData
 	}
 	testcase:{
 	    tests["Status code is 200 "] = responseCode.code === 200;
-	    tests[\"responseBody is 'Okey, resetData successfully!'\"] = responseBody.has(\"Okey, resetData successfully!\");
+	    tests["responseBody is 'Okey, resetData successfully!'"] = responseBody.has("Okey, resetData successfully!");
 	}
 
 1...7
@@ -984,7 +986,7 @@ post 0 /resetData
 	}
 	testcase:{
 	    tests["Status code is 200 "] = responseCode.code === 200;
-	    tests[\"responseBody is 'Okey, resetData successfully!'\"] = responseBody.has(\"Okey, resetData successfully!\"); 
+	    tests["responseBody is 'Okey, resetData successfully!'"] = responseBody.has("Okey, resetData successfully!"); 
 	}
 
 ```
