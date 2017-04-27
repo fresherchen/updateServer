@@ -1,6 +1,6 @@
 # Points and badges test cases readme
 
-tips: suggestion: use newman cli to run those test cases, remember to add '--delay-request' params and the delay time(10000).
+tips: suggestion: use newman cli to run those test cases, remember to add localhost.newman_environment, '--delay-request' params and the delay time(10000).
 
 ## test case 1 "exercise":
 
