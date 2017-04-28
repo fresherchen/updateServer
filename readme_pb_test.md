@@ -56,7 +56,7 @@ put /exercises
     }
 
 get 1st badges
-get /badges 
+get /badges
     input:{}
     output:
     [
@@ -520,6 +520,12 @@ post /messages
     }
     testcase:{
         tests["Status code is 200 "] = responseCode.code === 200;
+        var jsonData = JSON.parse(responseBody);
+        var messageId;
+        if (jsonData && jsonData.messageId) {
+            messageId = jsonData.messageId;
+        }
+        postman.setEnvironmentVariable(\"messageId\", messageId);
     }
 
 get 1th points
@@ -747,7 +753,6 @@ delete /JourneyMetrics/{{journeyMetric1}}
     input : {}
     output: {}
     testcase:{
-        var jsonData = JSON.parse(responseBody);
         tests["Status code is 200"] = responseCode.code === 200;
     }
 
@@ -773,24 +778,24 @@ create 2...5 task and delete the task
 
     same as 'create 1 task'...
 
-create task
-post /Tasks,
+    create task
+    post /Tasks,
 
-get task(survey) by id
-get /survey,
+    get task(survey) by id
+    get /survey,
 
-update task(survey) by id
-post /survey,
+    update task(survey) by id
+    post /survey,
 
-get JourneyMetrics by task id
-get /journeyMetric,
+    get JourneyMetrics by task id
+    get /journeyMetric,
 
-delete JourneyMetrics by task id
-delete /journeyMetric1,
-...,
+    delete JourneyMetrics by task id
+    delete /journeyMetric1,
+    ...,
 
-delete tasks by id
-delete /tasks
+    delete tasks by id
+    delete /tasks
 
 
 get 1st badges
@@ -822,27 +827,27 @@ create 6...10 task and delete task
 
     same as 'create 1 task'...
 
-create task
-post /Tasks,
+    create task
+    post /Tasks,
 
-get task(survey) by id
-get /survey,
+    get task(survey) by id
+    get /survey,
 
-update task(survey) by id
-post /survey,
+    update task(survey) by id
+    post /survey,
 
-get JourneyMetrics by task id
-get /journeyMetric,
+    get JourneyMetrics by task id
+    get /journeyMetric,
 
-delete JourneyMetrics by task id
-delete /journeyMetric1,
-...,
+    delete JourneyMetrics by task id
+    delete /journeyMetric1,
+    ...,
 
-delete tasks by id
-delete /tasks
+    delete tasks by id
+    delete /tasks
 
-get 2nd points
-get /points
+    get 2nd points
+    get /points
 
     input : {}
     output: {}
@@ -1162,7 +1167,7 @@ get /TaskDefinitions?filter[where][name]=Knee Assessment
         name: Knee Assessment
     }
     output: {
-      get taskDefinition by name
+        get taskDefinition by name
     }
     testcase:{
         tests[\"Status code is 200\"] = responseCode.code === 200;
@@ -1182,7 +1187,7 @@ get /JourneyPathTasks?filter[where][journeyId]={{journeyId}}&filter[where][taskD
         taskDefinitionId: taskDefinitionId,
     }
     output: {
-      get JourneyPathTasks by journeyId and taskDefinitionId
+        get JourneyPathTasks by journeyId and taskDefinitionId
     }
     testcase:{
         tests[\"Status code is 200\"] = responseCode.code === 200;
@@ -1208,7 +1213,7 @@ post /Tasks
         details: assessmentDetails }
     }
     output: {
-      create task
+        create task
     }
     testcase:{
         tests["Status code is 200"] = responseCode.code === 200;
@@ -1225,7 +1230,7 @@ get /{{taskId1}}/survey
 
     input : {}
     output: {
-       get survey Tasks, including questions
+        get survey Tasks, including questions
     }
     testcase:{
         var jsonData = JSON.parse(responseBody);
@@ -1264,7 +1269,7 @@ post /{{taskId1}}/survey
         {"id":questionId6,"value":4}, {"id":questionId7,"value":4}]}
     }
     output: {
-       update survey Tasks
+        update survey Tasks
     }
     testcase:{
         tests["Status code is 200"] = responseCode.code === 200;
@@ -1277,7 +1282,7 @@ get /JourneyMetrics?filter[where][taskId]={{taskId1}}
         taskId: taskId
     }
     output: {
-       journeyMetric create by updating Tasks
+        journeyMetric create by updating Tasks
     }
     testcase:{
         var jsonData = JSON.parse(responseBody);
@@ -1312,24 +1317,24 @@ create 2...4 task and delete the task
 
     same as 'create 1 task'...
 
-create task
-post /Tasks,
+    create task
+    post /Tasks,
 
-get task(survey) by id
-get /survey,
+    get task(survey) by id
+    get /survey,
 
-update task(survey) by id
-post /survey,
+    update task(survey) by id
+    post /survey,
 
-get JourneyMetrics by task id
-get /journeyMetric,
+    get JourneyMetrics by task id
+    get /journeyMetric,
 
-delete JourneyMetrics by task id
-delete /journeyMetric1,
-...,
+    delete JourneyMetrics by task id
+    delete /journeyMetric1,
+    ...,
 
-delete tasks by id
-delete /tasks
+    delete tasks by id
+    delete /tasks
 
 get 1st points
 get /points
@@ -1372,43 +1377,43 @@ create 5 task and delete the task
 
     same as 'create 1 task'...
 
-create task
-post /Tasks,
+    create task
+    post /Tasks,
 
-get task(survey) by id
-get /survey,
+    get task(survey) by id
+    get /survey,
 
-update task(survey) by id
-post /survey,
+    update task(survey) by id
+    post /survey,
 
-get JourneyMetrics by task id
-get /journeyMetric,
+    get JourneyMetrics by task id
+    get /journeyMetric,
 
-delete JourneyMetrics by task id
-delete /journeyMetric1,
-...,
+    delete JourneyMetrics by task id
+    delete /journeyMetric1,
+    ...,
 
-delete tasks by id
-delete /tasks
+    delete tasks by id
+    delete /tasks
 
 get 2nd points
 get /points
 
     input: {}
     output:{
-      "points": 550,
-      "history": [
-        {
-          "subtitle": "Jan 3rd - Jan 7th",
-          "title": "Week 1",
-          "items": [
+        "points": 550,
+        "history": [
             {
-              "value": "+550",
-              "label": "Assessment Points"
+              "subtitle": "Jan 3rd - Jan 7th",
+              "title": "Week 1",
+              "items": [
+                {
+                  "value": "+550",
+                  "label": "Assessment Points"
+                }
+              ]
             }
-          ]
-        }
-      ]
+        ]
     }
     testcase:{
         var jsonData = JSON.parse(responseBody);
@@ -1436,9 +1441,9 @@ post /resetData
         status: 2
     }
     output: {
-      "returnRes": {
-        "results": "Okey, resetData successfully!"
-      }
+        "returnRes": {
+            "results": "Okey, resetData successfully!"
+        }
     }
     testcase:{
         tests["Status code is 200 "] = responseCode.code === 200;
@@ -1458,9 +1463,9 @@ post /resetData
         type: feedback
     }
     output: {
-      "returnRes": {
-        "results": "Okey, resetData successfully!"
-      }
+        "returnRes": {
+            "results": "Okey, resetData successfully!"
+        }
     }
     testcase:{
         tests["Status code is 200 "] = responseCode.code === 200;
@@ -1554,7 +1559,7 @@ get /{{taskId1}}/survey
 
     input : {}
     output: {
-       get survey Tasks, including questions
+        get survey Tasks, including questions
     }
     testcase:{
         var jsonData = JSON.parse(responseBody);
@@ -1581,7 +1586,7 @@ post /{{taskId1}}/survey
         {"id":questionId2,"value":[\"Explanations\"]}]}
     }
     output: {
-       update survey Tasks
+        update survey Tasks
     }
     testcase:{
         tests["Status code is 200"] = responseCode.code === 200;
@@ -1594,7 +1599,7 @@ get /JourneyMetrics?filter[where][taskId]={{taskId1}}
         taskId: taskId
     }
     output: {
-       journeyMetric create by updating Tasks
+        journeyMetric create by updating Tasks
     }
     testcase:{
         var jsonData = JSON.parse(responseBody);
@@ -1632,21 +1637,21 @@ create 2...4 task and delete the task
 create task
 post /Tasks,
 
-get task(survey) by id
-get /survey,
+    get task(survey) by id
+    get /survey,
 
-update task(survey) by id
-post /survey,
+    update task(survey) by id
+    post /survey,
 
-get JourneyMetrics by task id
-get /journeyMetric,
+    get JourneyMetrics by task id
+    get /journeyMetric,
 
-delete JourneyMetrics by task id
-delete /journeyMetric1,
-...,
+    delete JourneyMetrics by task id
+    delete /journeyMetric1,
+    ...,
 
-delete tasks by id
-delete /tasks
+    delete tasks by id
+    delete /tasks
 
 get 1st points
 get /points
@@ -1690,24 +1695,24 @@ create 5 task and delete the task
 
     same as 'create 1 task'...
 
-create task
-post /Tasks,
+    create task
+    post /Tasks,
 
-get task(survey) by id
-get /survey,
+    get task(survey) by id
+    get /survey,
 
-update task(survey) by id
-post /survey,
+    update task(survey) by id
+    post /survey,
 
-get JourneyMetrics by task id
-get /journeyMetric,
+    get JourneyMetrics by task id
+    get /journeyMetric,
 
-delete JourneyMetrics by task id
-delete /journeyMetric1,
-...,
+    delete JourneyMetrics by task id
+    delete /journeyMetric1,
+    ...,
 
-delete tasks by id
-delete /tasks
+    delete tasks by id
+    delete /tasks
 
 get 2nd points
 get /points
@@ -1760,7 +1765,7 @@ post /resetData
     }
     testcase:{
         tests["Status code is 200 "] = responseCode.code === 200;
-        tests["responseBody is 'Okey, resetData successfully!'"] = responseBody.has("Okey, resetData successfully!"); 
+        tests["responseBody is 'Okey, resetData successfully!'"] = responseBody.has("Okey, resetData successfully!");
     }
 
 ```
