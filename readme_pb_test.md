@@ -33,10 +33,10 @@ get /exercises
     testcase:{
         var jsonData = JSON.parse(responseBody);
         if (jsonData.recommended.exercises && jsonData.recommended.exercises.length) {
-            postman.setEnvironmentVariable(\"exercise.id\", jsonData.recommended.exercises[0].id);
+            postman.setEnvironmentVariable("exercise.id", jsonData.recommended.exercises[0].id);
         }
-        tests[\"Status code is 200\"] = responseCode.code === 200;
-        tests[\"responseBody.recommended.exercises.length > 0\"] = jsonData.recommended.exercises.length > 0;
+        tests["Status code is 200"] = responseCode.code === 200;
+        tests["responseBody.recommended.exercises.length > 0"] = jsonData.recommended.exercises.length > 0;
     }
 
 update 1...7 exercises
@@ -259,7 +259,7 @@ get /badges
         tests["'Exercise Olympian' badge is earned"] = level5 === 'Earned';
     }
 
-clear 61 data
+clear 0 data
 post /resetData
 
     input: {
@@ -323,10 +323,10 @@ get /guide
     testcase:{
         var jsonData = JSON.parse(responseBody);
         if (jsonData.patientGuide) {
-            postman.setEnvironmentVariable(\"guide.patientGuide\", jsonData.patientGuide);
+            postman.setEnvironmentVariable("guide.patientGuide", jsonData.patientGuide);
         }
-        tests[\"Status code is 200\"] = responseCode.code === 200;
-        tests[\"responseBody.patientGuide is not undefined\"] = jsonData.patientGuide !== undefined;
+        tests["Status code is 200"] = responseCode.code === 200;
+        tests["responseBody.patientGuide is not undefined"] = jsonData.patientGuide !== undefined;
     }
 
 update 1 patientGuideProgress
@@ -525,7 +525,7 @@ post /messages
         if (jsonData && jsonData.messageId) {
             messageId = jsonData.messageId;
         }
-        postman.setEnvironmentVariable(\"messageId\", messageId);
+        postman.setEnvironmentVariable("messageId", messageId);
     }
 
 get 1th points
@@ -565,7 +565,7 @@ get /points
         tests["Send Message Points is 10"] = readPoints === 10;
     }
 
-clear 2 data
+clear 0 data
 post /resetData
 
     input : {
@@ -637,7 +637,7 @@ get /TaskDefinitions?filter[where][name]=Pre-op Check-In
         if (jsonData && jsonData.length) {
             taskDefinitionId = jsonData[0].id;
         }
-        postman.setEnvironmentVariable(\"taskDefinitionId\", taskDefinitionId);
+        postman.setEnvironmentVariable("taskDefinitionId", taskDefinitionId);
     }
 
 get 0 JourneyPathTasks
@@ -853,7 +853,7 @@ get /points
     output: {}
     testcase:{
         var jsonData = JSON.parse(responseBody);
-        tests[\"Status code is 200\"] = responseCode.code === 200;
+        tests["Status code is 200"] = responseCode.code === 200;
         var readPoints = 0;
         if (jsonData.history && jsonData.history.length) {
             for (var i in jsonData.history) {
@@ -866,7 +866,7 @@ get /points
                 }
             }
         }
-        tests[\"Check-in points is 375\"] = readPoints === 375;
+        tests["Check-in points is 375"] = readPoints === 375;
     }
 
 get 3rd badge
@@ -876,7 +876,7 @@ get /badges
     output: {}
     testcase:{
         var jsonData = JSON.parse(responseBody);
-        tests[\"Status code is 200\"] = responseCode.code === 200;
+        tests["Status code is 200"] = responseCode.code === 200;
         var level1;
         if (jsonData && jsonData.length) {
             for (var i in jsonData) {
@@ -891,10 +891,10 @@ get /badges
                 }
             }
         }
-        tests[\"'Check-in Reliable badge' is earned\"] = level1 === 'Earned';
+        tests["'Check-in Reliable badge' is earned"] = level1 === 'Earned';
     }
 
-clear 11 data
+clear 0 data
 post /resetData
 
     input : {
@@ -1151,13 +1151,13 @@ get /user
         user object
     }
     testcase:{
-        tests[\"Status code is 200\"] = responseCode.code === 200;
+        tests["Status code is 200"] = responseCode.code === 200;
         var jsonData = JSON.parse(responseBody);
         var journeyId;
         if (jsonData && jsonData.journeyId) {
             journeyId = jsonData.journeyId;
         }
-        postman.setEnvironmentVariable(\"journeyId\", journeyId);
+        postman.setEnvironmentVariable("journeyId", journeyId);
     }
 
 get 0 taskDefinition
@@ -1170,13 +1170,13 @@ get /TaskDefinitions?filter[where][name]=Knee Assessment
         get taskDefinition by name
     }
     testcase:{
-        tests[\"Status code is 200\"] = responseCode.code === 200;
+        tests["Status code is 200"] = responseCode.code === 200;
         var jsonData = JSON.parse(responseBody);
         var taskDefinitionId;
         if (jsonData && jsonData.length) {
             taskDefinitionId = jsonData[0].id;
         }
-        postman.setEnvironmentVariable(\"taskDefinitionId\", taskDefinitionId);
+        postman.setEnvironmentVariable("taskDefinitionId", taskDefinitionId);
     }
 
 get 0 journeyPathTask
@@ -1190,13 +1190,13 @@ get /JourneyPathTasks?filter[where][journeyId]={{journeyId}}&filter[where][taskD
         get JourneyPathTasks by journeyId and taskDefinitionId
     }
     testcase:{
-        tests[\"Status code is 200\"] = responseCode.code === 200;
+        tests["Status code is 200"] = responseCode.code === 200;
         var jsonData = JSON.parse(responseBody);
         var journeyPathTaskId;
         if (jsonData && jsonData.length) {
             journeyPathTaskId = jsonData[0].id;
         }
-        postman.setEnvironmentVariable(\"journeyPathTaskId\", journeyPathTaskId);
+        postman.setEnvironmentVariable("journeyPathTaskId", journeyPathTaskId);
     }
 
 create 1 task about assessment
@@ -1237,20 +1237,20 @@ get /{{taskId1}}/survey
         if (jsonData && jsonData.questionnaires) {
             if (jsonData.questionnaires.length) {
                 for (var i in jsonData.questionnaires) {
-                    if (jsonData.questionnaires[i].title === \"Stiffness\") {
-                        postman.setEnvironmentVariable(\"questionId1\", jsonData.questionnaires[i].id);
-                    } else if (jsonData.questionnaires[i].title === \"Pain during twisting/pivoting\") {
-                        postman.setEnvironmentVariable(\"questionId2\", jsonData.questionnaires[i].id);
-                    } else if (jsonData.questionnaires[i].title === \"Pain when straightening knee\") {
-                        postman.setEnvironmentVariable(\"questionId3\", jsonData.questionnaires[i].id);
-                    } else if (jsonData.questionnaires[i].title === \"Pain when going up or down stairs\") {
-                        postman.setEnvironmentVariable(\"questionId4\", jsonData.questionnaires[i].id);
-                    } else if (jsonData.questionnaires[i].title === \"Pain when standing upright\") {
-                        postman.setEnvironmentVariable(\"questionId5\", jsonData.questionnaires[i].id);
-                    } else if (jsonData.questionnaires[i].title === \"Pain when rising from sitting\") {
-                        postman.setEnvironmentVariable(\"questionId6\", jsonData.questionnaires[i].id);
-                    } else if (jsonData.questionnaires[i].title === \"Pain when bending to floor\") {
-                        postman.setEnvironmentVariable(\"questionId7\", jsonData.questionnaires[i].id);
+                    if (jsonData.questionnaires[i].title === "Stiffness") {
+                        postman.setEnvironmentVariable("questionId1", jsonData.questionnaires[i].id);
+                    } else if (jsonData.questionnaires[i].title === "Pain during twisting/pivoting") {
+                        postman.setEnvironmentVariable("questionId2", jsonData.questionnaires[i].id);
+                    } else if (jsonData.questionnaires[i].title === "Pain when straightening knee") {
+                        postman.setEnvironmentVariable("questionId3", jsonData.questionnaires[i].id);
+                    } else if (jsonData.questionnaires[i].title === "Pain when going up or down stairs") {
+                        postman.setEnvironmentVariable("questionId4", jsonData.questionnaires[i].id);
+                    } else if (jsonData.questionnaires[i].title === "Pain when standing upright") {
+                        postman.setEnvironmentVariable("questionId5", jsonData.questionnaires[i].id);
+                    } else if (jsonData.questionnaires[i].title === "Pain when rising from sitting") {
+                        postman.setEnvironmentVariable("questionId6", jsonData.questionnaires[i].id);
+                    } else if (jsonData.questionnaires[i].title === "Pain when bending to floor") {
+                        postman.setEnvironmentVariable("questionId7", jsonData.questionnaires[i].id);
                     }
                 }
             }
@@ -1356,7 +1356,7 @@ get /points
     }
     testcase:{
         var jsonData = JSON.parse(responseBody);
-        tests[\"Status code is 200\"] = responseCode.code === 200;
+        tests["Status code is 200"] = responseCode.code === 200;
         var readPoints = 0;
         if (jsonData.history && jsonData.history.length) {
             for (var i in jsonData.history) {
@@ -1369,7 +1369,7 @@ get /points
                 }
             }
         }
-        tests[\"Assessment points is 435\"] = readPoints === 435;
+        tests["Assessment points is 435"] = readPoints === 435;
     }
 
 create 5 task and delete the task
@@ -1416,7 +1416,7 @@ get /points
     }
     testcase:{
         var jsonData = JSON.parse(responseBody);
-        tests[\"Status code is 200\"] = responseCode.code === 200;
+        tests["Status code is 200"] = responseCode.code === 200;
         var readPoints = 0;
         if (jsonData.history && jsonData.history.length) {
             for (var i in jsonData.history) {
@@ -1429,7 +1429,7 @@ get /points
                 }
             }
         }
-        tests[\"Assessment points is 550\"] = readPoints === 550;
+        tests["Assessment points is 550"] = readPoints === 550;
     }
 
 clear 0 data
@@ -1479,13 +1479,13 @@ get /user
         user object
     }
     testcase:{
-        tests[\"Status code is 200\"] = responseCode.code === 200;
+        tests["Status code is 200"] = responseCode.code === 200;
         var jsonData = JSON.parse(responseBody);
         var journeyId;
         if (jsonData && jsonData.journeyId) {
             journeyId = jsonData.journeyId;
         }
-        postman.setEnvironmentVariable(\"journeyId\", journeyId);
+        postman.setEnvironmentVariable("journeyId", journeyId);
     }
 
 get 0 taskDefinition
@@ -1498,13 +1498,13 @@ get /TaskDefinitions?filter[where][name]=Office Visit Feedback
       get taskDefinition by name
     }
     testcase:{
-        tests[\"Status code is 200\"] = responseCode.code === 200;
+        tests["Status code is 200"] = responseCode.code === 200;
         var jsonData = JSON.parse(responseBody);
         var taskDefinitionId;
         if (jsonData && jsonData.length) {
             taskDefinitionId = jsonData[0].id;
         }
-        postman.setEnvironmentVariable(\"taskDefinitionId\", taskDefinitionId);
+        postman.setEnvironmentVariable("taskDefinitionId", taskDefinitionId);
     }
 
 get 0 journeyPathTask
@@ -1518,13 +1518,13 @@ get /JourneyPathTasks?filter[where][journeyId]={{journeyId}}&filter[where][taskD
       get JourneyPathTasks by journeyId and taskDefinitionId
     }
     testcase:{
-        tests[\"Status code is 200\"] = responseCode.code === 200;
+        tests["Status code is 200"] = responseCode.code === 200;
         var jsonData = JSON.parse(responseBody);
         var journeyPathTaskId;
         if (jsonData && jsonData.length) {
             journeyPathTaskId = jsonData[0].id;
         }
-        postman.setEnvironmentVariable(\"journeyPathTaskId\", journeyPathTaskId);
+        postman.setEnvironmentVariable("journeyPathTaskId", journeyPathTaskId);
     }
 
 create 1 task about feedback
@@ -1565,10 +1565,10 @@ get /{{taskId1}}/survey
         if (jsonData && jsonData.questionnaires) {
             if (jsonData.questionnaires.length) {
                 for (var i in jsonData.questionnaires) {
-                    if (jsonData.questionnaires[i].text === \"How was your last visit with Dr. Curry?\") {
-                        postman.setEnvironmentVariable(\"questionId1\", jsonData.questionnaires[i].id);
-                    } else if (jsonData.questionnaires[i].text === \"We're sorry to hear that you had a poor experience.\") {
-                        postman.setEnvironmentVariable(\"questionId2\", jsonData.questionnaires[i].id);
+                    if (jsonData.questionnaires[i].text === "How was your last visit with Dr. Curry?") {
+                        postman.setEnvironmentVariable("questionId1", jsonData.questionnaires[i].id);
+                    } else if (jsonData.questionnaires[i].text === "We're sorry to hear that you had a poor experience.") {
+                        postman.setEnvironmentVariable("questionId2", jsonData.questionnaires[i].id);
                     }
                 }
             }
@@ -1582,7 +1582,7 @@ post /{{taskId1}}/survey
 
     input : {
         {"answers": [{"id":questionId1,"value":4},
-        {"id":questionId2,"value":[\"Explanations\"]}]}
+        {"id":questionId2,"value":["Explanations"]}]}
     }
     output: {
         update survey Tasks
@@ -1672,7 +1672,7 @@ get /points
     }
     testcase:{
         var jsonData = JSON.parse(responseBody);
-        tests[\"Status code is 200\"] = responseCode.code === 200;
+        tests["Status code is 200"] = responseCode.code === 200;
         var readPoints = 0;
         if (jsonData.history && jsonData.history.length) {
             for (var i in jsonData.history) {
@@ -1685,7 +1685,7 @@ get /points
                 }
             }
         }
-        tests[\"Feedback points is 235\"] = readPoints === 235;
+        tests["Feedback points is 235"] = readPoints === 235;
     }
 
 
@@ -1733,7 +1733,7 @@ get /points
     }
     testcase:{
         var jsonData = JSON.parse(responseBody);
-        tests[\"Status code is 200\"] = responseCode.code === 200;
+        tests["Status code is 200"] = responseCode.code === 200;
         var readPoints = 0;
         if (jsonData.history && jsonData.history.length) {
             for (var i in jsonData.history) {
@@ -1746,7 +1746,7 @@ get /points
                 }
             }
         }
-        tests[\"Feedback points is 300\"] = readPoints === 300;
+        tests["Feedback points is 300"] = readPoints === 300;
     }
 
 clear 0 data
