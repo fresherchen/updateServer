@@ -1300,7 +1300,6 @@ delete /JourneyMetrics/{{journeyMetric1}}
     input : {}
     output: {}
     testcase:{
-        var jsonData = JSON.parse(responseBody);
         tests["Status code is 200"] = responseCode.code === 200;
     }
 
@@ -1617,7 +1616,6 @@ delete /JourneyMetrics/{{journeyMetric1}}
     input : {}
     output: {}
     testcase:{
-        var jsonData = JSON.parse(responseBody);
         tests["Status code is 200"] = responseCode.code === 200;
     }
 
