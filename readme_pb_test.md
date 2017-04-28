@@ -846,8 +846,8 @@ create 6...10 task and delete task
     delete tasks by id
     delete /tasks
 
-    get 2nd points
-    get /points
+get 2nd points
+get /points
 
     input : {}
     output: {}
